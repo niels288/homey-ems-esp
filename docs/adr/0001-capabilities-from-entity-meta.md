@@ -9,28 +9,31 @@ ones exist depends on the model and firmware. The existing community app
 (angas/se.assermark.ems-esp) hard-codes a handful per model; the MQTT route
 needs every value configured by hand.
 
-On EMS-ESP 3.6.3, `/api/<device>/entities` returns names only. The meta
-(`type`, `uom`, `writeable`, …) is only available per entity, and the `value`
-in that per-entity answer can say `not set` while `/values` has a number. Some
-entities answer HTTP 400 *with* a valid meta body.
+Since 3.7, `GET /api/<device>/entities` returns every entity with its meta
+(`type`, `uom`, `fullname`, `writeable`, `min`/`max`, `enum`). On 3.6 it
+returns names only, and the meta is only available per entity. Probing a
+3.6.3-dev.5 gateway (EnviLine, ESP32-S3) entity by entity restarted it twice,
+both times on `GET /api/boiler/uptimecomppool`.
 
 ## Decision
 
-- Keys come from `/api/<device>/values` (heating circuits nested as `hcN`).
-- Meta comes from `GET /api/<device>/<key>` per key, read even on HTTP 400.
-- Values always come from `/values`, never from the per-entity answer.
+- **EMS-ESP 3.7 or newer is required.** Discovery is one `/entities` request
+  per EMS device; older firmware gets a clear error instead of a probe.
+- Values always come from `/api/<device>/values`; nested circuits are keyed
+  `hc1.seltemp`, the same way `/entities` keys them.
 - Each entity maps to a sub-capability of a standard capability where Homey
   has one (`measure_temperature` for °C, `measure_power` for kW → W,
   `meter_power` for kWh), else of one of four generic app capabilities
   (`ems_number` with the unit as option, `ems_percent`, `ems_boolean`,
   `ems_text`). The title is the EMS-ESP `fullname`.
-- Version 1 exposes **readings** only (`writeable: false`); the 110 writeable
-  settings would bury the useful values and writing needs its own validation.
-- Discovery runs on device init and on settings change; capabilities that
-  disappear are removed.
+- Version 1 exposes **readings** only (`writeable: false`); the ~110 writeable
+  settings would bury the useful values, and writing needs its own validation.
+- Discovery runs on every device init and settings change, so entities from a
+  firmware update appear and vanished ones are removed.
 
 ## Consequences
 
-- Pairing is instant; the first init takes ~20 s (one request per entity).
+- No support for 3.6 and older; users update the gateway first (OTA in the
+  EMS-ESP web UI).
 - Homey Energy does not pick up sub-capabilities; a main `measure_power` /
   `meter_power` is a later, explicit choice.

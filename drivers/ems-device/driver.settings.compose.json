@@ -1,0 +1,17 @@
+[
+	{
+		"id": "host",
+		"type": "text",
+		"label": { "en": "Gateway IP address", "nl": "IP-adres gateway" },
+		"value": ""
+	},
+	{
+		"id": "poll_interval",
+		"type": "number",
+		"label": { "en": "Poll interval", "nl": "Uitleesinterval" },
+		"units": { "en": "seconds", "nl": "seconden" },
+		"value": 30,
+		"min": 10,
+		"max": 3600
+	}
+]

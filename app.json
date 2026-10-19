@@ -1,0 +1,152 @@
+{
+  "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
+  "id": "nl.niels288.emsesp",
+  "version": "0.1.0",
+  "compatibility": ">=12.0.0",
+  "sdk": 3,
+  "platforms": [
+    "local"
+  ],
+  "name": {
+    "en": "EMS-ESP",
+    "nl": "EMS-ESP"
+  },
+  "description": {
+    "en": "Reads your Bosch, Buderus or Nefit heat pump through an EMS-ESP gateway, without MQTT.",
+    "nl": "Leest je Bosch-, Buderus- of Nefit-warmtepomp uit via een EMS-ESP-gateway, zonder MQTT."
+  },
+  "category": [
+    "climate"
+  ],
+  "permissions": [],
+  "brandColor": "#1F6FEB",
+  "images": {
+    "small": "/assets/images/small.png",
+    "large": "/assets/images/large.png",
+    "xlarge": "/assets/images/xlarge.png"
+  },
+  "author": {
+    "name": "niels288"
+  },
+  "drivers": [
+    {
+      "name": {
+        "en": "EMS device",
+        "nl": "EMS-apparaat"
+      },
+      "class": "sensor",
+      "capabilities": [],
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "lan"
+      ],
+      "images": {
+        "small": "/drivers/ems-device/assets/images/small.png",
+        "large": "/drivers/ems-device/assets/images/large.png",
+        "xlarge": "/drivers/ems-device/assets/images/xlarge.png"
+      },
+      "pair": [
+        {
+          "id": "host",
+          "navigation": {
+            "next": "list_devices"
+          }
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "id": "ems-device",
+      "settings": [
+        {
+          "id": "host",
+          "type": "text",
+          "label": {
+            "en": "Gateway IP address",
+            "nl": "IP-adres gateway"
+          },
+          "value": ""
+        },
+        {
+          "id": "poll_interval",
+          "type": "number",
+          "label": {
+            "en": "Poll interval",
+            "nl": "Uitleesinterval"
+          },
+          "units": {
+            "en": "seconds",
+            "nl": "seconden"
+          },
+          "value": 30,
+          "min": 10,
+          "max": 3600
+        }
+      ]
+    }
+  ],
+  "capabilities": {
+    "ems_boolean": {
+      "type": "boolean",
+      "title": {
+        "en": "State",
+        "nl": "Status"
+      },
+      "getable": true,
+      "setable": false,
+      "insights": true,
+      "uiComponent": "sensor",
+      "icon": "/assets/icon.svg"
+    },
+    "ems_number": {
+      "type": "number",
+      "title": {
+        "en": "Value",
+        "nl": "Waarde"
+      },
+      "getable": true,
+      "setable": false,
+      "insights": true,
+      "uiComponent": "sensor",
+      "icon": "/assets/icon.svg"
+    },
+    "ems_percent": {
+      "type": "number",
+      "title": {
+        "en": "Percentage",
+        "nl": "Percentage"
+      },
+      "units": {
+        "en": "%"
+      },
+      "min": 0,
+      "max": 100,
+      "getable": true,
+      "setable": false,
+      "insights": true,
+      "uiComponent": "sensor",
+      "icon": "/assets/icon.svg"
+    },
+    "ems_text": {
+      "type": "string",
+      "title": {
+        "en": "Text",
+        "nl": "Tekst"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icon.svg"
+    }
+  }
+}

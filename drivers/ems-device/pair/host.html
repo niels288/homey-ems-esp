@@ -1,0 +1,15 @@
+<form id="form" class="homey-form">
+  <label class="homey-form-label" for="host" data-i18n="pair.host_label">Gateway IP</label>
+  <input class="homey-form-input" id="host" type="text" placeholder="192.168.1.253" required />
+  <button class="homey-button-primary-full" type="submit" data-i18n="pair.connect">Connect</button>
+</form>
+<script type="application/javascript">
+  document.getElementById("form").addEventListener("submit", (event) => {
+    event.preventDefault();
+    Homey.showLoadingOverlay();
+    Homey.emit("host", document.getElementById("host").value)
+      .then(() => Homey.nextView())
+      .catch((err) => Homey.alert(err.message))
+      .finally(() => Homey.hideLoadingOverlay());
+  });
+</script>

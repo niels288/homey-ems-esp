@@ -1,0 +1,7 @@
+{
+	"pair": {
+		"host_label": "IP address of your EMS-ESP gateway",
+		"connect": "Connect",
+		"no_devices": "The gateway answers, but sees no EMS devices on the bus."
+	}
+}
