@@ -1,12 +1,11 @@
 # AGENTS.md
 
-Personal repository of niels288. It follows the same working agreements as the
-NGBLU engineering baseline (RFC 0001), adapted for a solo private repository.
+Homey Pro app for EMS-ESP gateways, maintained by niels288. Public, MIT.
 
 ## Working agreements
 
-- **Language.** Issues, PRs, commits, code comments and developer docs in
-  English. `README.md` and end-user text (Homey UI, locales `nl`) in Dutch.
+- **Language.** Everything in English (issues, PRs, commits, comments, docs,
+  `README.md`); Homey UI text in English and Dutch (`locales/`, compose files).
 - **Issue first.** Every change starts with an issue carrying exactly one type
   label (`bug`, `enhancement`, `documentation`, `refactor`, `architecture`)
   plus `needs-triage`. The PR closes it with `Closes #<n>`.
@@ -25,7 +24,7 @@ NGBLU engineering baseline (RFC 0001), adapted for a solo private repository.
 
 ## Repo Profile
 
-baseline: full (personal)
+baseline: full
 
 - **CI**: `check` = Biome, `test` = `npm test` (node:test, no Homey runtime
   needed) + `homey app validate`.
@@ -34,7 +33,8 @@ baseline: full (personal)
 - **Critical Change** (do not self-merge without testing on the real
   gateway): anything that **writes** to EMS-ESP. Writing changes a family's
   heating; it ships only after it was validated against real data.
-- **Test gateway**: EMS-ESP 3.6.3 at `10.99.1.253`, reachable from
-  `10.0.10.0/24` over the site-to-site tunnel. Read freely; never POST to it
-  without the owner's explicit go-ahead.
+- **Testing against a real gateway**: someone else's heating. Only `GET`
+  `/api/system`, `/api/<device>/entities` and `/api/<device>/values`, no
+  bursts; never `POST` without the owner's explicit go-ahead. Probing entities
+  one by one restarted a 3.6.3 gateway (ADR 0001).
 - Keep it small: no option, layer or abstraction without a present need.
