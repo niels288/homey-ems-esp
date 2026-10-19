@@ -25,7 +25,7 @@ Kies welke EMS-apparaten (warmtepomp/ketel, thermostaat) je wilt toevoegen.
 ```bash
 npm test                              # unit tests, geen Homey nodig
 npx biome check .                     # lint + format
-node scripts/discover.js 10.99.1.253  # toont welke capabilities een gateway oplevert (2 verzoeken per apparaat)
+node scripts/discover.js <gateway-ip>  # toont welke capabilities een gateway oplevert (2 verzoeken per apparaat)
 ```
 
 Werkafspraken staan in [`AGENTS.md`](AGENTS.md), keuzes in [`docs/adr`](docs/adr).
