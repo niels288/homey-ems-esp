@@ -1,31 +1,39 @@
-# EMS-ESP voor Homey
+# EMS-ESP for Homey
 
-Homey Pro-app voor een [EMS-ESP](https://emsesp.org)-gateway (BBQKees) op een
-Bosch/Buderus/Nefit-warmtepomp of -ketel. Je vult alleen het IP-adres van de
-gateway in; de app leest zelf welke waarden er zijn en maakt ze aan in Homey.
-Geen MQTT-broker nodig.
+Homey Pro app for an [EMS-ESP](https://emsesp.org) gateway (e.g. BBQKees) on a
+Bosch, Buderus, Nefit, Junkers or Worcester heat pump or boiler. Enter the
+gateway's IP address; the app asks the gateway which values exist and creates
+them in Homey. No MQTT broker, no manual mapping.
 
-**Status:** in ontwikkeling, alleen lezen. Vereist **EMS-ESP 3.7 of nieuwer**;
-update de gateway eerst via de EMS-ESP-webinterface als je een oudere versie
-hebt. Ontwikkeld met een Nefit EnviLine.
+**Status:** in development, read-only. Developed with a Nefit EnviLine split
+heat pump.
 
-## Installeren (ontwikkelversie)
+## Requirements
+
+- Homey Pro
+- EMS-ESP **3.7 or newer** (update through the EMS-ESP web interface)
+
+## Install (development)
 
 ```bash
 npm install -g homey
 homey login
-homey app run        # of: homey app install
+homey app run        # or: homey app install
 ```
 
-Daarna in Homey: *Apparaat toevoegen → EMS-ESP → IP-adres van de gateway*.
-Kies welke EMS-apparaten (warmtepomp/ketel, thermostaat) je wilt toevoegen.
+Then in Homey: *Add device → EMS-ESP → gateway IP address*, and pick the EMS
+devices (heat pump/boiler, thermostat) to add.
 
-## Ontwikkelen
+## Develop
 
 ```bash
-npm test                              # unit tests, geen Homey nodig
-npx biome check .                     # lint + format
-node scripts/discover.js <gateway-ip>  # toont welke capabilities een gateway oplevert (2 verzoeken per apparaat)
+npm test                         # unit tests, no Homey needed
+npx biome check .                # lint + format
+node scripts/discover.js <ip>    # what a gateway yields (2 requests per device)
 ```
 
-Werkafspraken staan in [`AGENTS.md`](AGENTS.md), keuzes in [`docs/adr`](docs/adr).
+Working agreements: [`AGENTS.md`](AGENTS.md). Design decisions: [`docs/adr`](docs/adr).
+
+## License
+
+MIT
