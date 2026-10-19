@@ -24,6 +24,14 @@ homey app run        # or: homey app install
 Then in Homey: *Add device → EMS-ESP → gateway IP address*, and pick the EMS
 devices (heat pump/boiler, thermostat) to add.
 
+Value names come from the gateway, in its language. For Dutch (or German,
+Swedish, …) names, set the language in the EMS-ESP web interface and restart
+the app in Homey.
+
+If `homey app install` fails with a bare `400`, run it from a computer on the
+same network as the Homey: the install route through the Athom cloud failed
+on a Homey Pro (Early 2023), the local one worked.
+
 ## Develop
 
 ```bash
