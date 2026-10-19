@@ -1,5 +1,6 @@
-Real EMS-ESP 3.6.3 answers from an EnviLine heat pump with an RC300 (2026-10-19).
+Real EMS-ESP 3.8.6 answers from a Nefit EnviLine heat pump with an RC300
+thermostat, captured 2026-10-19 right after a firmware update:
+`/api/<device>/entities` and `/api/<device>/values`.
 
-`*-entities.json` is shaped like the 3.7+ `/api/<device>/entities` answer but
-built from the 3.6.3 per-entity answers (same fields, from `get_value_json`).
-Replace it with a real 3.7+ dump once the test gateway runs that version.
+`boiler-entities-3.6.3-names-only.json` is a cut of the pre-3.7 `/entities`
+answer, for the firmware gate.

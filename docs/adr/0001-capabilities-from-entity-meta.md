@@ -22,7 +22,7 @@ both times on `GET /api/boiler/uptimecomppool`.
 - Values always come from `/api/<device>/values`; nested circuits are keyed
   `hc1.seltemp`, the same way `/entities` keys them.
 - Each entity maps to a sub-capability of a standard capability where Homey
-  has one (`measure_temperature` for °C, `measure_power` for kW → W,
+  has one (`measure_temperature` for °C, `measure_power` for W and kW → W,
   `meter_power` for kWh), else of one of four generic app capabilities
   (`ems_number` with the unit as option, `ems_percent`, `ems_boolean`,
   `ems_text`). The title is the EMS-ESP `fullname`.
@@ -33,6 +33,9 @@ both times on `GET /api/boiler/uptimecomppool`.
 
 ## Consequences
 
+- Entities that exist but carry no value (gas-burner fields on a heat pump)
+  still get a capability. Filtering on "has a value" would make a gateway that
+  is still starting delete capabilities, and with them their Insights.
 - No support for 3.6 and older; users update the gateway first (OTA in the
   EMS-ESP web UI).
 - Homey Energy does not pick up sub-capabilities; a main `measure_power` /
