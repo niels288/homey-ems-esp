@@ -1,0 +1,9 @@
+{
+	"type": "boolean",
+	"title": { "en": "State", "nl": "Status" },
+	"getable": true,
+	"setable": false,
+	"insights": true,
+	"uiComponent": "sensor",
+	"icon": "/assets/icon.svg"
+}

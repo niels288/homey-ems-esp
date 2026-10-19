@@ -1,0 +1,19 @@
+{
+ "heatingoff": [
+  "force heating off"
+ ],
+ "heatingactive": [
+  "heating active"
+ ],
+ "tapwateractive": [
+  "tapwater active"
+ ],
+ "selflowtemp": [
+  "selected flow temperature",
+  "\u00b0C"
+ ],
+ "heatingpumpmod": [
+  "heating pump modulation",
+  "%"
+ ]
+}

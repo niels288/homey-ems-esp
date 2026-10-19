@@ -1,0 +1,12 @@
+{
+	"type": "number",
+	"title": { "en": "Percentage", "nl": "Percentage" },
+	"units": { "en": "%" },
+	"min": 0,
+	"max": 100,
+	"getable": true,
+	"setable": false,
+	"insights": true,
+	"uiComponent": "sensor",
+	"icon": "/assets/icon.svg"
+}

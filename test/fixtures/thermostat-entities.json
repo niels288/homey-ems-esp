@@ -1,0 +1,750 @@
+{
+ "datetime": {
+  "name": "datetime",
+  "fullname": "date/time",
+  "circuit": "",
+  "value": "19.10.2026 23:14",
+  "type": "string",
+  "readable": true,
+  "writeable": true,
+  "visible": true
+ },
+ "intoffset": {
+  "name": "intoffset",
+  "fullname": "internal temperature offset",
+  "circuit": "",
+  "type": "number",
+  "min": -12,
+  "max": 12,
+  "uom": "\u00b0C",
+  "readable": true,
+  "writeable": true,
+  "visible": true,
+  "value": "not set"
+ },
+ "floordry": {
+  "name": "floordry",
+  "fullname": "floor drying",
+  "circuit": "",
+  "type": "enum",
+  "enum": [
+   "off",
+   "start",
+   "heat",
+   "hold",
+   "cool",
+   "end"
+  ],
+  "readable": true,
+  "writeable": false,
+  "visible": true,
+  "value": "not set"
+ },
+ "dampedoutdoortemp": {
+  "name": "dampedoutdoortemp",
+  "fullname": "damped outdoor temperature",
+  "circuit": "",
+  "type": "number",
+  "uom": "\u00b0C",
+  "readable": true,
+  "writeable": false,
+  "visible": true,
+  "value": "not set"
+ },
+ "floordrytemp": {
+  "name": "floordrytemp",
+  "fullname": "floor drying temperature",
+  "circuit": "",
+  "type": "number",
+  "uom": "\u00b0C",
+  "readable": true,
+  "writeable": false,
+  "visible": true,
+  "value": "not set"
+ },
+ "building": {
+  "name": "building",
+  "fullname": "building type",
+  "circuit": "",
+  "type": "enum",
+  "enum": [
+   "light",
+   "medium",
+   "heavy"
+  ],
+  "readable": true,
+  "writeable": true,
+  "visible": true,
+  "value": "not set"
+ },
+ "minexttemp": {
+  "name": "minexttemp",
+  "fullname": "minimal external temperature",
+  "circuit": "",
+  "type": "number",
+  "min": -126,
+  "max": 126,
+  "uom": "\u00b0C",
+  "readable": true,
+  "writeable": true,
+  "visible": true,
+  "value": "not set"
+ },
+ "damping": {
+  "name": "damping",
+  "fullname": "damping outdoor temperature",
+  "circuit": "",
+  "type": "boolean",
+  "readable": true,
+  "writeable": true,
+  "visible": true,
+  "value": "not set"
+ },
+ "energycostratio": {
+  "name": "energycostratio",
+  "fullname": "energy cost ratio",
+  "circuit": "",
+  "type": "number",
+  "min": 0,
+  "max": 20,
+  "readable": true,
+  "writeable": true,
+  "visible": true,
+  "value": "not set"
+ },
+ "pvenableww": {
+  "name": "pvenableww",
+  "fullname": "enable raise dhw",
+  "circuit": "",
+  "type": "boolean",
+  "readable": true,
+  "writeable": true,
+  "visible": true,
+  "value": "not set"
+ },
+ "pvraiseheat": {
+  "name": "pvraiseheat",
+  "fullname": "raise heating with PV",
+  "circuit": "",
+  "type": "number",
+  "min": 0,
+  "max": 5,
+  "uom": "K",
+  "readable": true,
+  "writeable": true,
+  "visible": true,
+  "value": "not set"
+ },
+ "pvlowercool": {
+  "name": "pvlowercool",
+  "fullname": "lower cooling with PV",
+  "circuit": "",
+  "type": "number",
+  "min": -5,
+  "max": 0,
+  "uom": "K",
+  "readable": true,
+  "writeable": true,
+  "visible": true,
+  "value": "not set"
+ },
+ "wwmode": {
+  "name": "wwmode",
+  "fullname": "dhw mode",
+  "circuit": "",
+  "type": "enum",
+  "enum": [
+   "off",
+   "normal",
+   "comfort",
+   "auto",
+   "own prog",
+   "eco"
+  ],
+  "readable": true,
+  "writeable": true,
+  "visible": true,
+  "value": "not set"
+ },
+ "wwcircmode": {
+  "name": "wwcircmode",
+  "fullname": "dhw circulation pump mode",
+  "circuit": "",
+  "type": "enum",
+  "enum": [
+   "off",
+   "on",
+   "auto",
+   "own prog"
+  ],
+  "readable": true,
+  "writeable": true,
+  "visible": true,
+  "value": "not set"
+ },
+ "wwchargeduration": {
+  "name": "wwchargeduration",
+  "fullname": "dhw charge duration",
+  "circuit": "",
+  "type": "number",
+  "min": 0,
+  "max": 3810,
+  "uom": "minutes",
+  "readable": true,
+  "writeable": true,
+  "visible": true,
+  "value": "not set"
+ },
+ "wwcharge": {
+  "name": "wwcharge",
+  "fullname": "dhw charge",
+  "circuit": "",
+  "type": "boolean",
+  "readable": true,
+  "writeable": true,
+  "visible": true,
+  "value": "not set"
+ },
+ "wwextra1": {
+  "name": "wwextra1",
+  "fullname": "dhw circuit 1 extra",
+  "circuit": "",
+  "value": 0,
+  "type": "number",
+  "uom": "\u00b0C",
+  "readable": true,
+  "writeable": false,
+  "visible": true
+ },
+ "wwdisinfecting": {
+  "name": "wwdisinfecting",
+  "fullname": "dhw disinfecting",
+  "circuit": "",
+  "type": "boolean",
+  "readable": true,
+  "writeable": true,
+  "visible": true,
+  "value": "not set"
+ },
+ "wwdisinfectday": {
+  "name": "wwdisinfectday",
+  "fullname": "dhw disinfection day",
+  "circuit": "",
+  "type": "enum",
+  "enum": [
+   "mo",
+   "tu",
+   "we",
+   "th",
+   "fr",
+   "sa",
+   "su",
+   "all"
+  ],
+  "readable": true,
+  "writeable": true,
+  "visible": true,
+  "value": "not set"
+ },
+ "wwdisinfecttime": {
+  "name": "wwdisinfecttime",
+  "fullname": "dhw disinfection time",
+  "circuit": "",
+  "type": "number",
+  "min": 0,
+  "max": 1431,
+  "uom": "minutes",
+  "readable": true,
+  "writeable": true,
+  "visible": true,
+  "value": "not set"
+ },
+ "hc1.seltemp": {
+  "name": "seltemp",
+  "fullname": "hc1 selected room temperature",
+  "circuit": "hc1",
+  "value": 21.5,
+  "type": "number",
+  "min": 0,
+  "max": 30,
+  "uom": "\u00b0C",
+  "readable": true,
+  "writeable": true,
+  "visible": true
+ },
+ "hc1.currtemp": {
+  "name": "currtemp",
+  "fullname": "hc1 current room temperature",
+  "circuit": "hc1",
+  "value": 22.5,
+  "type": "number",
+  "uom": "\u00b0C",
+  "readable": true,
+  "writeable": false,
+  "visible": true
+ },
+ "hc1.haclimate": {
+  "name": "haclimate",
+  "fullname": "hc1 Discovery current room temperature",
+  "circuit": "hc1",
+  "value": "roomTemp",
+  "type": "enum",
+  "enum": [
+   "selTemp",
+   "roomTemp"
+  ],
+  "readable": true,
+  "writeable": false,
+  "visible": true
+ },
+ "hc1.mode": {
+  "name": "mode",
+  "fullname": "hc1 mode",
+  "circuit": "hc1",
+  "value": "manual",
+  "type": "enum",
+  "enum": [
+   "manual",
+   "auto"
+  ],
+  "readable": true,
+  "writeable": true,
+  "visible": true
+ },
+ "hc1.modetype": {
+  "name": "modetype",
+  "fullname": "hc1 mode type",
+  "circuit": "hc1",
+  "value": "comfort",
+  "type": "enum",
+  "enum": [
+   "eco",
+   "comfort"
+  ],
+  "readable": true,
+  "writeable": false,
+  "visible": true
+ },
+ "hc1.ecotemp": {
+  "name": "ecotemp",
+  "fullname": "hc1 eco temperature",
+  "circuit": "hc1",
+  "value": 15.0,
+  "type": "number",
+  "min": 0,
+  "max": 127,
+  "uom": "\u00b0C",
+  "readable": true,
+  "writeable": true,
+  "visible": true
+ },
+ "hc1.manualtemp": {
+  "name": "manualtemp",
+  "fullname": "hc1 manual temperature",
+  "circuit": "hc1",
+  "value": 21.5,
+  "type": "number",
+  "min": 0,
+  "max": 127,
+  "uom": "\u00b0C",
+  "readable": true,
+  "writeable": true,
+  "visible": true
+ },
+ "hc1.comforttemp": {
+  "name": "comforttemp",
+  "fullname": "hc1 comfort temperature",
+  "circuit": "hc1",
+  "value": 21.0,
+  "type": "number",
+  "min": 0,
+  "max": 127,
+  "uom": "\u00b0C",
+  "readable": true,
+  "writeable": true,
+  "visible": true
+ },
+ "hc1.summertemp": {
+  "name": "summertemp",
+  "fullname": "hc1 summer temperature",
+  "circuit": "hc1",
+  "type": "number",
+  "min": 10,
+  "max": 30,
+  "uom": "\u00b0C",
+  "readable": true,
+  "writeable": true,
+  "visible": true,
+  "value": "not set"
+ },
+ "hc1.designtemp": {
+  "name": "designtemp",
+  "fullname": "hc1 design temperature",
+  "circuit": "hc1",
+  "type": "number",
+  "min": 0,
+  "max": 254,
+  "uom": "\u00b0C",
+  "readable": true,
+  "writeable": true,
+  "visible": true,
+  "value": "not set"
+ },
+ "hc1.offsettemp": {
+  "name": "offsettemp",
+  "fullname": "hc1 offset temperature",
+  "circuit": "hc1",
+  "type": "number",
+  "min": -126,
+  "max": 126,
+  "uom": "\u00b0C",
+  "readable": true,
+  "writeable": true,
+  "visible": true,
+  "value": "not set"
+ },
+ "hc1.minflowtemp": {
+  "name": "minflowtemp",
+  "fullname": "hc1 min flow temperature",
+  "circuit": "hc1",
+  "type": "number",
+  "min": 0,
+  "max": 254,
+  "uom": "\u00b0C",
+  "readable": true,
+  "writeable": true,
+  "visible": true,
+  "value": "not set"
+ },
+ "hc1.maxflowtemp": {
+  "name": "maxflowtemp",
+  "fullname": "hc1 max flow temperature",
+  "circuit": "hc1",
+  "type": "number",
+  "min": 0,
+  "max": 254,
+  "uom": "\u00b0C",
+  "readable": true,
+  "writeable": true,
+  "visible": true,
+  "value": "not set"
+ },
+ "hc1.roominfluence": {
+  "name": "roominfluence",
+  "fullname": "hc1 room influence",
+  "circuit": "hc1",
+  "type": "number",
+  "min": 0,
+  "max": 254,
+  "uom": "\u00b0C",
+  "readable": true,
+  "writeable": true,
+  "visible": true,
+  "value": "not set"
+ },
+ "hc1.roominflfactor": {
+  "name": "roominflfactor",
+  "fullname": "hc1 room influence factor",
+  "circuit": "hc1",
+  "type": "number",
+  "min": 0,
+  "max": 25,
+  "readable": true,
+  "writeable": true,
+  "visible": true,
+  "value": "not set"
+ },
+ "hc1.curroominfl": {
+  "name": "curroominfl",
+  "fullname": "hc1 current room influence",
+  "circuit": "hc1",
+  "type": "number",
+  "uom": "\u00b0C",
+  "readable": true,
+  "writeable": false,
+  "visible": true,
+  "value": "not set"
+ },
+ "hc1.nofrostmode": {
+  "name": "nofrostmode",
+  "fullname": "hc1 nofrost mode",
+  "circuit": "hc1",
+  "type": "enum",
+  "enum": [
+   "room",
+   "outdoor",
+   "room outdoor"
+  ],
+  "readable": true,
+  "writeable": true,
+  "visible": true,
+  "value": "not set"
+ },
+ "hc1.nofrosttemp": {
+  "name": "nofrosttemp",
+  "fullname": "hc1 nofrost temperature",
+  "circuit": "hc1",
+  "type": "number",
+  "min": -126,
+  "max": 126,
+  "uom": "\u00b0C",
+  "readable": true,
+  "writeable": true,
+  "visible": true,
+  "value": "not set"
+ },
+ "hc1.targetflowtemp": {
+  "name": "targetflowtemp",
+  "fullname": "hc1 target flow temperature",
+  "circuit": "hc1",
+  "value": 29,
+  "type": "number",
+  "uom": "\u00b0C",
+  "readable": true,
+  "writeable": false,
+  "visible": true
+ },
+ "hc1.heatingtype": {
+  "name": "heatingtype",
+  "fullname": "hc1 heating type",
+  "circuit": "hc1",
+  "type": "enum",
+  "enum": [
+   "off",
+   "radiator",
+   "convector",
+   "floor"
+  ],
+  "readable": true,
+  "writeable": true,
+  "visible": true,
+  "value": "not set"
+ },
+ "hc1.hpoperatingmode": {
+  "name": "hpoperatingmode",
+  "fullname": "hc1 heatpump operating mode",
+  "circuit": "hc1",
+  "type": "enum",
+  "enum": [
+   "off",
+   "auto",
+   "heating",
+   "cooling"
+  ],
+  "readable": true,
+  "writeable": true,
+  "visible": true,
+  "value": "not set"
+ },
+ "hc1.hpoperatingstate": {
+  "name": "hpoperatingstate",
+  "fullname": "hc1 heatpump operating state",
+  "circuit": "hc1",
+  "value": "heating",
+  "type": "enum",
+  "enum": [
+   "heating",
+   "off",
+   "cooling"
+  ],
+  "readable": true,
+  "writeable": false,
+  "visible": true
+ },
+ "hc1.controlmode": {
+  "name": "controlmode",
+  "fullname": "hc1 control mode",
+  "circuit": "hc1",
+  "type": "enum",
+  "enum": [
+   "weather compensated",
+   "outside basepoint",
+   "n/a",
+   "room",
+   "power",
+   "constant"
+  ],
+  "readable": true,
+  "writeable": true,
+  "visible": true,
+  "value": "not set"
+ },
+ "hc1.program": {
+  "name": "program",
+  "fullname": "hc1 program",
+  "circuit": "hc1",
+  "value": "prog 1",
+  "type": "enum",
+  "enum": [
+   "prog 1",
+   "prog 2"
+  ],
+  "readable": true,
+  "writeable": true,
+  "visible": true
+ },
+ "hc1.tempautotemp": {
+  "name": "tempautotemp",
+  "fullname": "hc1 temporary set temperature automode",
+  "circuit": "hc1",
+  "value": -1.0,
+  "type": "number",
+  "min": -1,
+  "max": 30,
+  "uom": "\u00b0C",
+  "readable": true,
+  "writeable": true,
+  "visible": true
+ },
+ "hc1.remoteseltemp": {
+  "name": "remoteseltemp",
+  "fullname": "hc1 temporary set temperature from remote",
+  "circuit": "hc1",
+  "value": 23.0,
+  "type": "number",
+  "min": -1,
+  "max": 30,
+  "uom": "\u00b0C",
+  "readable": true,
+  "writeable": true,
+  "visible": true
+ },
+ "hc1.fastheatup": {
+  "name": "fastheatup",
+  "fullname": "hc1 fast heatup",
+  "circuit": "hc1",
+  "type": "number",
+  "min": 0,
+  "max": 100,
+  "uom": "%",
+  "readable": true,
+  "writeable": true,
+  "visible": true,
+  "value": "not set"
+ },
+ "hc1.switchonoptimization": {
+  "name": "switchonoptimization",
+  "fullname": "hc1 switch-on optimization",
+  "circuit": "hc1",
+  "type": "boolean",
+  "readable": true,
+  "writeable": true,
+  "visible": true,
+  "value": "not set"
+ },
+ "hc1.reducemode": {
+  "name": "reducemode",
+  "fullname": "hc1 reduce mode",
+  "circuit": "hc1",
+  "value": "reduce",
+  "type": "enum",
+  "enum": [
+   "outdoor",
+   "room",
+   "reduce"
+  ],
+  "readable": true,
+  "writeable": true,
+  "visible": true
+ },
+ "hc1.noreducetemp": {
+  "name": "noreducetemp",
+  "fullname": "hc1 no reduce below temperature",
+  "circuit": "hc1",
+  "value": -31,
+  "type": "number",
+  "min": -126,
+  "max": 126,
+  "uom": "\u00b0C",
+  "readable": true,
+  "writeable": true,
+  "visible": true
+ },
+ "hc1.reducetemp": {
+  "name": "reducetemp",
+  "fullname": "hc1 off/reduce switch temperature",
+  "circuit": "hc1",
+  "value": 5,
+  "type": "number",
+  "min": -126,
+  "max": 126,
+  "uom": "\u00b0C",
+  "readable": true,
+  "writeable": true,
+  "visible": true
+ },
+ "hc1.wwprio": {
+  "name": "wwprio",
+  "fullname": "hc1 dhw priority",
+  "circuit": "hc1",
+  "type": "boolean",
+  "readable": true,
+  "writeable": true,
+  "visible": true,
+  "value": "not set"
+ },
+ "hc1.coolingon": {
+  "name": "coolingon",
+  "fullname": "hc1 cooling",
+  "circuit": "hc1",
+  "type": "boolean",
+  "readable": true,
+  "writeable": false,
+  "visible": true,
+  "value": "not set"
+ },
+ "hc1.hpmode": {
+  "name": "hpmode",
+  "fullname": "hc1 HP Mode",
+  "circuit": "hc1",
+  "value": "heating",
+  "type": "enum",
+  "enum": [
+   "heating",
+   "cooling",
+   "heating&cooling"
+  ],
+  "readable": true,
+  "writeable": true,
+  "visible": true
+ },
+ "hc1.dewoffset": {
+  "name": "dewoffset",
+  "fullname": "hc1 dew point offset",
+  "circuit": "hc1",
+  "type": "number",
+  "min": 2,
+  "max": 10,
+  "uom": "K",
+  "readable": true,
+  "writeable": true,
+  "visible": true,
+  "value": "not set"
+ },
+ "hc1.roomtempdiff": {
+  "name": "roomtempdiff",
+  "fullname": "hc1 room temp difference",
+  "circuit": "hc1",
+  "type": "number",
+  "min": 0,
+  "max": 254,
+  "uom": "K",
+  "readable": true,
+  "writeable": true,
+  "visible": true,
+  "value": "not set"
+ },
+ "hc1.hpminflowtemp": {
+  "name": "hpminflowtemp",
+  "fullname": "hc1 HP min. flow temp.",
+  "circuit": "hc1",
+  "type": "number",
+  "min": 0,
+  "max": 254,
+  "uom": "\u00b0C",
+  "readable": true,
+  "writeable": true,
+  "visible": true,
+  "value": "not set"
+ }
+}

@@ -1,0 +1,7 @@
+{
+	"pair": {
+		"host_label": "IP-adres van je EMS-ESP-gateway",
+		"connect": "Verbinden",
+		"no_devices": "De gateway antwoordt, maar ziet geen EMS-apparaten op de bus."
+	}
+}
