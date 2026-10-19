@@ -57,9 +57,11 @@ module.exports = class EmsDevice extends Homey.Device {
 			if (isDiscovered(id) && !wanted.has(id)) await this.removeCapability(id);
 		}
 		for (const { id, options } of capabilities) {
-			if (this.hasCapability(id)) continue;
-			await this.addCapability(id);
-			await this.setCapabilityOptions(id, options);
+			if (!this.hasCapability(id)) await this.addCapability(id);
+			// Titles follow the gateway's language setting, which can change after pairing.
+			if (this.getCapabilityOptions(id).title?.en !== options.title.en) {
+				await this.setCapabilityOptions(id, options);
+			}
 		}
 	}
 
