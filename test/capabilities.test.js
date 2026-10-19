@@ -28,6 +28,7 @@ test("readings map to standard capabilities where Homey has one", () => {
 	assert.deepEqual(capabilityFor("curflowtemp", entities.boiler.curflowtemp), {
 		id: "measure_temperature.curflowtemp",
 		options: { title: { en: "current flow temperature" } },
+		factor: 1,
 	});
 	assert.equal(
 		capabilityFor("hppower", entities.boiler.hppower).id,
@@ -52,9 +53,9 @@ test("other readings map to the generic app capabilities", () => {
 		capabilityFor("hpcircspd", entities.boiler.hpcircspd).id,
 		"ems_percent.hpcircspd",
 	);
-	const minutes = capabilityFor("uptimecompww", entities.boiler.uptimecompww);
-	assert.equal(minutes.id, "ems_number.uptimecompww");
-	assert.deepEqual(minutes.options.units, { en: "minutes" });
+	const minutes = capabilityFor("burnworkmin", entities.boiler.burnworkmin);
+	assert.equal(minutes.id, "ems_number.burnworkmin");
+	assert.deepEqual(minutes.options.units, { en: "min" });
 });
 
 test("circuit keys become valid capability ids", () => {
@@ -73,26 +74,39 @@ test("writeable settings and unknown meta are not exposed in version 1", () => {
 	assert.equal(capabilityFor("remotetemp", {}), null);
 });
 
-test("every discovered capability id is valid and unique", () => {
-	const ids = Object.values(entities).flatMap((device) =>
-		Object.entries(device)
+test("every discovered capability id is valid and unique within its device", () => {
+	for (const [device, byKey] of Object.entries(entities)) {
+		const ids = Object.entries(byKey)
 			.map(([key, meta]) => capabilityFor(key, meta))
 			.filter(Boolean)
-			.map(({ id }) => id),
-	);
-	assert.ok(ids.length > 50, `only ${ids.length} capabilities`);
-	assert.equal(new Set(ids).size, ids.length);
-	for (const id of ids) assert.match(id, /^[a-z_]+\.[a-z0-9_]+$/);
+			.map(({ id }) => id);
+		assert.ok(ids.length > 10, `${device}: only ${ids.length} capabilities`);
+		assert.equal(new Set(ids).size, ids.length, device);
+		for (const id of ids) assert.match(id, /^[a-z_]+\.[a-z0-9_]+$/);
+	}
 });
 
-test("homeyValue converts units and on/off, and drops values that are not set", () => {
-	assert.equal(homeyValue("measure_power.hppower", 1.5), 1500);
-	assert.equal(homeyValue("measure_temperature.curflowtemp", 44.4), 44.4);
-	assert.equal(homeyValue("ems_boolean.heatingactive", "off"), false);
-	assert.equal(homeyValue("ems_boolean.heatingactive", "ON"), true);
-	assert.equal(homeyValue("ems_text.hpactivity", "none"), "none");
-	assert.equal(homeyValue("meter_power.nrgsupptotal", "not set"), null);
-	assert.equal(homeyValue("ems_number.uptimecompww", undefined), null);
+test("homeyValue scales power to W, reads every on/off format, and drops values that are not set", () => {
+	const kw = capabilityFor("hppower", entities.boiler.hppower);
+	const w = capabilityFor("hpcurrpower", entities.boiler.hpcurrpower);
+	assert.equal(w.id, "measure_power.hpcurrpower");
+	assert.equal(homeyValue(kw, 1.5), 1500);
+	assert.equal(homeyValue(w, 1500), 1500);
+	const flag = { id: "ems_boolean.heatingactive", factor: 1 };
+	assert.equal(homeyValue(flag, "off"), false);
+	assert.equal(homeyValue(flag, "ON"), true);
+	assert.equal(
+		homeyValue({ id: "ems_text.hpactivity", factor: 1 }, "none"),
+		"none",
+	);
+	assert.equal(
+		homeyValue({ id: "meter_power.nrgsupptotal", factor: 1 }, "not set"),
+		null,
+	);
+	assert.equal(
+		homeyValue({ id: "ems_number.burnworkmin", factor: 1 }, undefined),
+		null,
+	);
 });
 
 test("isDiscovered recognises every capability discovery can create, and nothing else", () => {
