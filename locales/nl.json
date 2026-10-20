@@ -19,5 +19,21 @@
 	},
 	"errors": {
 		"token": "EMS-ESP weigerde de wijziging. Vul het toegangstoken van de gateway in bij de instellingen van dit apparaat."
+	},
+	"overview": {
+		"outdoor_unit": "Buitenunit",
+		"outdoor_sensor": "Buiten",
+		"condenser": "Condensor",
+		"element": "Element",
+		"valve": "Driewegklep",
+		"cylinder": "Warm water",
+		"buffer": "Buffer",
+		"pump": "Pomp",
+		"distributor": "Vloerverwarming",
+		"thermostat": "Kamer",
+		"flow": "Aanvoer",
+		"return": "Retour",
+		"target_flow": "streef",
+		"compressor_off": "uit"
 	}
 }

@@ -1,0 +1,9 @@
+{
+	"name": { "en": "Heat pump overview", "nl": "Warmtepompoverzicht" },
+	"height": "77%",
+	"transparent": false,
+	"settings": [],
+	"api": {
+		"getOverview": { "method": "GET", "path": "/" }
+	}
+}

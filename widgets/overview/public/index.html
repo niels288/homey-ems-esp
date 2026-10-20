@@ -1,0 +1,188 @@
+<!doctype html>
+<!-- biome-ignore lint/a11y/useHtmlLang: Homey shows the widget in the user's language, English or Dutch -->
+<html>
+<head>
+<style>
+  body { margin: 0; color: var(--homey-text-color, #1a1a1a); font-family: var(--homey-font-family, system-ui, sans-serif); }
+  svg { display: block; width: 100%; height: auto; }
+  .label { font-size: 24px; fill: currentColor; fill-opacity: 0.6; }
+  .value { font-size: 34px; font-weight: 600; fill: currentColor; }
+  .big { font-size: 44px; }
+  /* Tints of the text colour, so light and dark mode both work without Homey variables for surfaces. */
+  .box { fill: currentColor; fill-opacity: 0.06; stroke: currentColor; stroke-opacity: 0.25; stroke-width: 3; }
+  .wall { fill: currentColor; fill-opacity: 0.15; }
+  .ink { fill: none; stroke: currentColor; stroke-width: 4; }
+  .refrigerant { fill: none; stroke: currentColor; stroke-opacity: 0.45; stroke-width: 5; }
+  .hot { fill: none; stroke: #e5484d; stroke-width: 9; stroke-linejoin: round; }
+  .cold { fill: none; stroke: #3b82f6; stroke-width: 9; stroke-linejoin: round; }
+  .idle { opacity: 0.25; }
+  .control { fill: none; stroke: #9a9a96; stroke-width: 4; stroke-dasharray: 10 10; }
+  .pump circle { fill: var(--homey-background-color, #fff); stroke: currentColor; stroke-width: 4; }
+  /* A narrow dashboard column: drop the explanatory labels, enlarge the values. */
+  @media (max-width: 420px) {
+    .label { display: none; }
+    .value { font-size: 44px; }
+    .big { font-size: 54px; }
+  }
+  .pump.on circle { stroke: #22a06b; stroke-width: 6; }
+  .element rect { fill: #fdf2e0; stroke: #b7791f; stroke-width: 3; }
+  .element.on rect { fill: #f6ad3c; }
+  .cylinder.on rect.tank { stroke: #e5484d; stroke-width: 6; }
+  .fan { transform-origin: 150px 365px; }
+  .on .fan { animation: spin 1.6s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce) { .on .fan { animation: none; } }
+</style>
+</head>
+<body class="homey-widget-full">
+<svg viewBox="0 30 1000 770" role="img" aria-labelledby="title">
+  <title id="title">EMS-ESP</title>
+  <defs>
+    <linearGradient id="tank" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f7c9c9" /><stop offset="1" stop-color="#cfe0fb" />
+    </linearGradient>
+  </defs>
+
+  <!-- control signal: thermostat to outdoor unit -->
+  <path class="control" d="M866 80H80V250" />
+
+  <!-- thermostat -->
+  <circle class="ink" cx="900" cy="80" r="34" />
+  <path class="ink" d="M900 80l14-14" />
+  <text class="label" x="900" y="148" text-anchor="middle" data-label="thermostat" />
+  <text class="value" x="900" y="186" text-anchor="middle" data-text="room" />
+
+  <!-- outdoor sensor -->
+  <rect class="ink" x="196" y="140" width="16" height="48" rx="8" />
+  <circle class="ink" cx="204" cy="198" r="13" />
+  <text class="label" x="176" y="160" text-anchor="end" data-label="outdoor_sensor" />
+  <text class="value" x="176" y="198" text-anchor="end" data-text="outdoor" />
+
+  <!-- outdoor unit -->
+  <g data-on="compressor">
+    <rect class="box" x="20" y="250" width="225" height="235" rx="18" />
+    <rect x="36" y="280" width="34" height="160" rx="6" fill="#dbe7fb" stroke="#3b82f6" stroke-width="3" />
+    <circle class="ink" cx="150" cy="365" r="58" />
+    <g class="fan">
+      <path fill="currentColor" d="M150 365c-6-22 0-42 14-44 14 4 10 26-14 44zm0 0c22-6 40 6 38 20-8 12-28 2-38-20zm0 0c-16 16-38 18-44 6 0-14 22-18 44-6z" />
+    </g>
+    <text class="value" x="132" y="470" text-anchor="middle" data-text="compressor" />
+  </g>
+  <rect x="0" y="485" width="262" height="6" fill="#4caf50" />
+  <text class="label" x="132" y="530" text-anchor="middle" data-label="outdoor_unit" />
+  <text class="value big" x="132" y="610" text-anchor="middle" data-text="cop" data-prefix="COP " />
+
+  <!-- refrigerant lines through the wall -->
+  <path class="refrigerant" d="M245 320H312M245 430H312" />
+  <rect class="wall" x="262" y="60" width="14" height="580" />
+
+  <!-- indoor unit -->
+  <rect class="box" x="290" y="190" width="420" height="440" rx="20" />
+
+  <!-- heating water: hot side -->
+  <path class="hot" d="M352 300H382M452 300H486" />
+  <path class="hot" data-route="buffer" d="M500 286V236H770V262" />
+  <path class="hot" data-route="cylinder" d="M514 300H566" />
+  <path class="hot" d="M820 290H932V560" />
+
+  <!-- heating water: cold side -->
+  <path class="cold" data-route="cylinder" d="M566 500H414" />
+  <path class="cold" data-route="buffer" d="M790 492V560M760 470H736V618H392V524" />
+  <path class="cold" d="M392 480V460H352" />
+
+  <!-- condenser -->
+  <rect x="312" y="260" width="40" height="220" rx="6" fill="#fbe3e1" stroke="#e5484d" stroke-width="3" />
+  <path stroke="#e5484d" stroke-width="2" d="M318 285h28M318 310h28M318 335h28M318 360h28M318 385h28M318 410h28M318 435h28M318 460h28" />
+  <text class="value" x="332" y="250" text-anchor="middle" data-text="condenser" />
+
+  <!-- electric element -->
+  <g class="element" data-on="element">
+    <rect x="382" y="276" width="70" height="48" rx="8" />
+    <path fill="#b7791f" d="M422 282l-14 22h11l-6 16 16-24h-11z" />
+  </g>
+  <text class="value" x="430" y="424" text-anchor="middle" data-text="element" />
+
+  <!-- 3-way valve -->
+  <circle cx="500" cy="300" r="16" fill="#7cc36b" stroke="#3f7d35" stroke-width="3" />
+  <text class="label" x="474" y="372" text-anchor="middle" data-label="valve" />
+
+  <!-- hot water cylinder -->
+  <g class="cylinder" data-on="charging">
+    <rect class="tank" x="566" y="270" width="110" height="260" rx="40" fill="url(#tank)" stroke="#bdbbb3" stroke-width="3" />
+    <path class="hot" stroke-width="6" d="M566 300l90 14-90 18 90 18-90 18" />
+    <path class="cold" stroke-width="6" d="M566 386l90 18-90 18 90 18-90 18 90 18-90 24" />
+  </g>
+  <text class="value" x="621" y="574" text-anchor="middle" data-text="cylinder" />
+  <text class="label" x="621" y="606" text-anchor="middle" data-label="cylinder" />
+
+  <!-- flow and return -->
+  <text class="label" x="636" y="222" text-anchor="middle" data-label="flow" />
+  <text class="value" x="636" y="186" text-anchor="middle" data-text="flow" />
+  <text class="label" x="560" y="666" text-anchor="middle" data-label="return" />
+  <text class="value" x="560" y="702" text-anchor="middle" data-text="return" />
+
+  <!-- circulation pump -->
+  <g class="pump" data-on="pump">
+    <circle cx="392" cy="502" r="22" />
+    <path fill="currentColor" d="M392 490l11 19h-22z" />
+  </g>
+  <text class="value" x="378" y="572" text-anchor="end" data-text="pump" />
+
+  <!-- buffer -->
+  <rect x="740" y="262" width="80" height="230" rx="32" fill="url(#tank)" stroke="#bdbbb3" stroke-width="3" />
+  <text class="label" x="876" y="350" text-anchor="middle" data-label="buffer" />
+
+  <!-- heating pump -->
+  <g class="pump" data-on="pump">
+    <circle cx="932" cy="410" r="22" />
+    <path fill="currentColor" d="M932 422l11-19h-22z" />
+  </g>
+
+  <!-- distributor and floor heating -->
+  <rect class="box" x="760" y="560" width="220" height="44" rx="8" />
+  <path class="hot" stroke-width="6" d="M790 604v80a10 10 0 0 0 20 0v-80M850 604v80a10 10 0 0 0 20 0v-80M910 604v80a10 10 0 0 0 20 0v-80" />
+  <text class="label" x="990" y="740" text-anchor="end" data-label="distributor" />
+  <text class="value" x="990" y="778" text-anchor="end" data-text="targetFlow" />
+</svg>
+<script type="application/javascript">
+  const REFRESH_MS = 30_000;
+
+  function show({ text, on, labels }) {
+    for (const node of document.querySelectorAll("[data-label]")) {
+      node.textContent = labels[node.dataset.label] ?? "";
+    }
+    for (const node of document.querySelectorAll("[data-text]")) {
+      const value = text[node.dataset.text];
+      node.textContent = value === null ? "" : `${node.dataset.prefix ?? ""}${value}`;
+    }
+    const compressor = document.querySelector('[data-text="compressor"]');
+    if (!on.compressor) compressor.textContent = labels.compressor_off;
+    if (text.targetFlow) {
+      document.querySelector('[data-text="targetFlow"]').textContent = `${labels.target_flow} ${text.targetFlow}`;
+    }
+    for (const node of document.querySelectorAll("[data-on]")) {
+      node.classList.toggle("on", on[node.dataset.on]);
+    }
+    // The 3-way valve sends the hot water either to the cylinder or to the heating.
+    const active = on.toCylinder ? "cylinder" : "buffer";
+    for (const node of document.querySelectorAll("[data-route]")) {
+      node.classList.toggle("idle", node.dataset.route !== active);
+    }
+  }
+
+  async function refresh() {
+    try {
+      show(await Homey.api("GET", "/"));
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  // biome-ignore lint/correctness/noUnusedVariables: Homey calls it once the widget is loaded.
+  function onHomeyReady() {
+    refresh().finally(() => Homey.ready());
+    setInterval(refresh, REFRESH_MS);
+  }
+</script>
+</body>
+</html>
