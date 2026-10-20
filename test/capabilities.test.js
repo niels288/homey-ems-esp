@@ -120,3 +120,17 @@ test("isDiscovered recognises every capability discovery can create, and nothing
 	assert.equal(isDiscovered("measure_temperature"), false);
 	assert.equal(isDiscovered("onoff"), false);
 });
+
+test("homeyValue drops EMS-ESP's unset marker, also after its seconds-to-minutes conversion", () => {
+	const counter = capabilityFor(
+		"nrgsuppcooling",
+		entities.boiler.nrgsuppcooling,
+	);
+	const minutes = capabilityFor(
+		"uptimecompcooling",
+		entities.boiler.uptimecompcooling,
+	);
+	assert.equal(homeyValue(counter, values.boiler.nrgsuppcooling), null);
+	assert.equal(homeyValue(minutes, values.boiler.uptimecompcooling), null);
+	assert.equal(homeyValue(minutes, values.boiler.uptimecompheating), 386665);
+});
