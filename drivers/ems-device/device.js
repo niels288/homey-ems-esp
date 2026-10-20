@@ -111,8 +111,18 @@ module.exports = class EmsDevice extends Homey.Device {
 			this.registerCapabilityListener(id, (value) => this.#write(key, value));
 		}
 		// Titles follow the gateway's language setting, which can change after pairing.
-		if (this.getCapabilityOptions(id).title?.en !== options.title.en) {
+		if (this.#titleOf(id) !== options.title.en) {
 			await this.setCapabilityOptions(id, options);
+		}
+	}
+
+	// Homey throws "Invalid Capability" for a capability that has no options stored yet,
+	// such as one added after pairing (athombv/homey-apps-sdk-issues#296).
+	#titleOf(id) {
+		try {
+			return this.getCapabilityOptions(id).title?.en;
+		} catch {
+			return undefined;
 		}
 	}
 
