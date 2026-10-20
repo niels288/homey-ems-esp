@@ -85,3 +85,21 @@ test("discover fails on an empty entity list instead of removing every capabilit
 		/no boiler entities yet/,
 	);
 });
+
+test("choices list every value with its current reading, null where the gateway has none", async (t) => {
+	t.mock.method(
+		globalThis,
+		"fetch",
+		answering({
+			"/api/boiler/entities": require("./fixtures/boiler-entities.json"),
+			"/api/boiler/values": require("./fixtures/boiler-values.json"),
+		}),
+	);
+	const choices = await new Gateway("gw").choices("boiler");
+	const flow = choices.find(({ key }) => key === "curflowtemp");
+	assert.equal(flow.title, "current flow temperature");
+	assert.equal(flow.units, "°C");
+	assert.equal(typeof flow.value, "number");
+	assert.ok(choices.some(({ value }) => value === null));
+	assert.equal(globalThis.fetch.mock.callCount(), 2);
+});

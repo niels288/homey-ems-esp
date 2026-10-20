@@ -3,5 +3,17 @@
 		"host_label": "IP-adres van je EMS-ESP-gateway",
 		"connect": "Verbinden",
 		"no_devices": "De gateway antwoordt, maar ziet geen EMS-apparaten op de bus."
+	},
+	"values": {
+		"search": "Zoek waarden",
+		"save": "Opslaan",
+		"no_value": "geen waarde",
+		"on": "aan",
+		"off": "uit",
+		"only_with_value": "Alleen met waarde",
+		"all": "Alles",
+		"count": "__shown__ van __total__ waarden zichtbaar",
+		"warn_remove": "__count__ waarden worden uit Homey verwijderd, met hun Insights-geschiedenis. Flows die ze gebruiken werken dan niet meer.",
+		"settings_title": "Waarden per apparaat"
 	}
 }

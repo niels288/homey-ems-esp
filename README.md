@@ -22,7 +22,8 @@ homey app run        # or: homey app install
 ```
 
 Then in Homey: *Add device → EMS-ESP → gateway IP address*, and pick the EMS
-devices (heat pump/boiler, thermostat) to add.
+devices (heat pump/boiler, thermostat) to add, then which of their values to
+show. Change that later through the device's *Repair* or the app's settings.
 
 Value names come from the gateway, in its language. For Dutch (or German,
 Swedish, …) names, set the language in the EMS-ESP web interface and restart

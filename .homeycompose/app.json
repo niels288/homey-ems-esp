@@ -17,6 +17,10 @@
 		"large": "/assets/images/large.png",
 		"xlarge": "/assets/images/xlarge.png"
 	},
+	"api": {
+		"getDevices": { "method": "GET", "path": "/devices" },
+		"setHidden": { "method": "PUT", "path": "/hidden" }
+	},
 	"author": { "name": "niels288" },
 	"homepage": "https://github.com/niels288/homey-ems-esp",
 	"support": "https://github.com/niels288/homey-ems-esp/issues",

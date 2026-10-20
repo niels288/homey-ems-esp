@@ -3,5 +3,17 @@
 		"host_label": "IP address of your EMS-ESP gateway",
 		"connect": "Connect",
 		"no_devices": "The gateway answers, but sees no EMS devices on the bus."
+	},
+	"values": {
+		"search": "Search values",
+		"save": "Save",
+		"no_value": "no value",
+		"on": "on",
+		"off": "off",
+		"only_with_value": "Only with a value",
+		"all": "All",
+		"count": "__shown__ of __total__ values shown",
+		"warn_remove": "__count__ values will be removed from Homey, with their Insights history. Flows that use them stop working.",
+		"settings_title": "Values per device"
 	}
 }

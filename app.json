@@ -25,6 +25,16 @@
     "large": "/assets/images/large.png",
     "xlarge": "/assets/images/xlarge.png"
   },
+  "api": {
+    "getDevices": {
+      "method": "GET",
+      "path": "/devices"
+    },
+    "setHidden": {
+      "method": "PUT",
+      "path": "/hidden"
+    }
+  },
   "author": {
     "name": "niels288"
   },
@@ -64,12 +74,16 @@
           "id": "list_devices",
           "template": "list_devices",
           "navigation": {
-            "next": "add_devices"
+            "next": "values"
           }
         },
         {
-          "id": "add_devices",
-          "template": "add_devices"
+          "id": "values"
+        }
+      ],
+      "repair": [
+        {
+          "id": "values"
         }
       ],
       "id": "ems-device",
