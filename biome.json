@@ -7,7 +7,7 @@
 	},
 	"files": {
 		"ignoreUnknown": false,
-		"includes": ["**", "!app.json", "!test/fixtures"]
+		"includes": ["**", "!app.json", "!.homeychangelog.json", "!test/fixtures"]
 	},
 	"formatter": {
 		"enabled": true,
