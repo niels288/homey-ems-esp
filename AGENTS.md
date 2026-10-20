@@ -20,7 +20,9 @@ Homey Pro app for EMS-ESP gateways, maintained by niels288. Public, MIT.
 - **Worktree per issue** on branch `issue-<n>-<slug>`; the main checkout stays
   on `main`. Commit, rebase on `main`, then push.
 - **Decisions** go in `docs/adr/`, domain terms in `CONTEXT.md`, changes in
-  GitHub Releases.
+  `.homeychangelog.json` (the App Store shows it). Every published build gets
+  an annotated tag `v<version>` on the commit it was built from; no GitHub
+  Releases (the App Store keeps versions, changelog and archives).
 
 ## Repo Profile
 

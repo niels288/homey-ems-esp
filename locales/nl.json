@@ -14,6 +14,7 @@
 		"all": "Alles",
 		"count": "__shown__ van __total__ waarden zichtbaar",
 		"warn_remove": "__count__ waarden worden uit Homey verwijderd, met hun Insights-geschiedenis. Flows die ze gebruiken werken dan niet meer.",
-		"settings_title": "Waarden per apparaat"
+		"settings_title": "Waarden per apparaat",
+		"pending": "na 24 uur"
 	}
 }

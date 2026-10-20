@@ -26,8 +26,8 @@
   const t = (key, tokens) => Homey.__(`values.${key}`, tokens);
   let devices = [];
 
-  function reading({ value, units }) {
-    if (value === null) return t("no_value");
+  function reading({ value, units, pending }) {
+    if (value === null) return t(pending ? "pending" : "no_value");
     if (typeof value === "boolean") return t(value ? "on" : "off");
     return units ? `${value} ${units}` : String(value);
   }
@@ -52,7 +52,7 @@
         });
       };
       for (const [label, pick] of [
-        ["only_with_value", (choice) => choice.value !== null],
+        ["only_with_value", (choice) => choice.value !== null || choice.pending],
         ["all", () => true],
       ]) {
         const button = document.createElement("button");

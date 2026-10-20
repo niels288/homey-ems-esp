@@ -128,6 +128,19 @@
       "uiComponent": "sensor",
       "icon": "/assets/icon.svg"
     },
+    "ems_cop": {
+      "type": "number",
+      "title": {
+        "en": "COP",
+        "nl": "COP"
+      },
+      "decimals": 2,
+      "getable": true,
+      "setable": false,
+      "insights": true,
+      "uiComponent": "sensor",
+      "icon": "/assets/icon.svg"
+    },
     "ems_number": {
       "type": "number",
       "title": {
