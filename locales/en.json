@@ -14,6 +14,7 @@
 		"all": "All",
 		"count": "__shown__ of __total__ values shown",
 		"warn_remove": "__count__ values will be removed from Homey, with their Insights history. Flows that use them stop working.",
-		"settings_title": "Values per device"
+		"settings_title": "Values per device",
+		"pending": "after 24 hours"
 	}
 }

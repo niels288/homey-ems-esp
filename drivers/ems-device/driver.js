@@ -27,7 +27,7 @@ module.exports = class EmsDriver extends Homey.Driver {
 			selected = devices;
 		});
 
-		// Nothing exists yet, so the proposal is every value that has a reading now.
+		// Nothing exists yet, so the proposal is every value that has a reading now, or will once the device has watched long enough.
 		session.setHandler("values", async () =>
 			Promise.all(
 				selected.map(async (device) => ({
@@ -36,7 +36,7 @@ module.exports = class EmsDriver extends Homey.Driver {
 					paired: false,
 					choices: (await gateway.choices(device.data.type)).map((choice) => ({
 						...choice,
-						shown: choice.value !== null,
+						shown: choice.value !== null || choice.pending,
 					})),
 				})),
 			),

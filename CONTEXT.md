@@ -9,3 +9,4 @@
 | **Reading** | An entity that is not `writeable`. Version 1 exposes readings only. |
 | **Discovery** | Turning the entity list plus meta into Homey capabilities; runs on device init, so new firmware entities appear without re-pairing. |
 | **Hidden value** | An entity the user chose not to show; its key is kept in the device store, and discovery skips it (ADR 0002). |
+| **COP** | Coefficient of performance: heat supplied ÷ electricity consumed (aux heater included), from the gateway's own counters (ADR 0003). |

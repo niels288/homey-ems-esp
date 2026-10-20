@@ -1,6 +1,7 @@
 const Homey = require("homey");
 const { Gateway } = require("../../lib/gateway");
 const { isDiscovered } = require("../../lib/capabilities");
+const { windowCop } = require("../../lib/cop");
 
 const RETRY_DISCOVERY_MS = 60_000;
 
@@ -26,6 +27,12 @@ module.exports = class EmsDevice extends Homey.Device {
 		);
 		return choices.map((choice) => ({
 			...choice,
+			// A windowed COP's value lives here, not on the gateway.
+			value:
+				choice.value ??
+				(this.hasCapability(choice.id)
+					? this.getCapabilityValue(choice.id)
+					: null),
 			shown: !hidden.has(choice.key),
 		}));
 	}
@@ -91,11 +98,34 @@ module.exports = class EmsDevice extends Homey.Device {
 		}
 	}
 
+	// Counter samples go in the store, so a restart does not cost a day of waiting.
+	async #windowed({ id, energy }, capabilities) {
+		const { cop } = capabilities.find((capability) => capability.id === id);
+		const stored = this.getStoreValue(`samples.${id}`) ?? [];
+		const { samples, value } = windowCop(
+			stored,
+			Date.now(),
+			energy,
+			cop.windowMs,
+		);
+		// About once an hour, not on every poll.
+		if (samples.at(-1)?.t !== stored.at(-1)?.t) {
+			await this.setStoreValue(`samples.${id}`, samples);
+		}
+		return { id, value };
+	}
+
 	async #update(gateway, type, capabilities) {
 		try {
-			const readings = await gateway.readings(type, capabilities);
+			const readings = await Promise.all(
+				(await gateway.readings(type, capabilities)).map((reading) =>
+					reading.energy ? this.#windowed(reading, capabilities) : reading,
+				),
+			);
 			await Promise.all(
-				readings.map(({ id, value }) => this.setCapabilityValue(id, value)),
+				readings
+					.filter(({ value }) => value !== null)
+					.map(({ id, value }) => this.setCapabilityValue(id, value)),
 			);
 			await this.setAvailable();
 		} catch (err) {

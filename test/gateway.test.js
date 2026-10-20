@@ -103,3 +103,26 @@ test("choices list every value with its current reading, null where the gateway 
 	assert.ok(choices.some(({ value }) => value === null));
 	assert.equal(globalThis.fetch.mock.callCount(), 2);
 });
+
+test("readings carry lifetime COP, and the energy for the 24-hour COP the device keeps", async (t) => {
+	t.mock.method(
+		globalThis,
+		"fetch",
+		answering({
+			"/api/boiler/entities": require("./fixtures/boiler-entities.json"),
+			"/api/boiler/values": require("./fixtures/boiler-values.json"),
+		}),
+	);
+	const gateway = new Gateway("gw");
+	const capabilities = await gateway.discover("boiler");
+	const readings = await gateway.readings("boiler", capabilities);
+	const of = (id) => readings.find((reading) => reading.id === id);
+	assert.equal(of("ems_cop.total").value, 3.69);
+	assert.deepEqual(of("ems_cop.day"), {
+		id: "ems_cop.day",
+		value: null,
+		energy: { supplied: 32513, consumed: 8816 },
+	});
+	const choices = await gateway.choices("boiler");
+	assert.equal(choices.find(({ key }) => key === "cop.day").pending, true);
+});
