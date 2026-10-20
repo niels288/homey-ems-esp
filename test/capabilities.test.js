@@ -134,3 +134,14 @@ test("homeyValue drops EMS-ESP's unset marker, also after its seconds-to-minutes
 	assert.equal(homeyValue(minutes, values.boiler.uptimecompcooling), null);
 	assert.equal(homeyValue(minutes, values.boiler.uptimecompheating), 386665);
 });
+
+test("homeyValue reads on/off in every language the gateway speaks", () => {
+	const flag = capabilityFor("heatingactive", entities.boiler.heatingactive);
+	for (const on of ["aan", "AAN", "an", "på", "wł.", "açık", "ZAP"]) {
+		assert.equal(homeyValue(flag, on), true, on);
+	}
+	for (const off of ["uit", "UIT", "aus", "AV", "wył.", "kapalı", "vyp"]) {
+		assert.equal(homeyValue(flag, off), false, off);
+	}
+	assert.equal(homeyValue(flag, "misschien"), null);
+});
