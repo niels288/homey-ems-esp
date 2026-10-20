@@ -1,6 +1,6 @@
 {
 	"id": "nl.niels288.emsesp",
-	"version": "0.1.0",
+	"version": "1.0.0",
 	"compatibility": ">=12.0.0",
 	"sdk": 3,
 	"platforms": ["local"],
@@ -17,5 +17,9 @@
 		"large": "/assets/images/large.png",
 		"xlarge": "/assets/images/xlarge.png"
 	},
-	"author": { "name": "niels288" }
+	"author": { "name": "niels288" },
+	"homepage": "https://github.com/niels288/homey-ems-esp",
+	"support": "https://github.com/niels288/homey-ems-esp/issues",
+	"source": "https://github.com/niels288/homey-ems-esp",
+	"bugs": { "url": "https://github.com/niels288/homey-ems-esp/issues" }
 }

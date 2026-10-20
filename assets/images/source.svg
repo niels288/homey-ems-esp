@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 700">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2f80ff"/><stop offset="1" stop-color="#0b3d91"/>
+    </linearGradient>
+    <linearGradient id="body" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#dfe5ec"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="700" fill="url(#bg)"/>
+  <circle cx="820" cy="120" r="260" fill="#fff" opacity=".06"/>
+  <circle cx="150" cy="640" r="220" fill="#fff" opacity=".05"/>
+  <!-- heat pump -->
+  <g transform="translate(140 230)">
+    <rect x="30" y="300" width="40" height="40" rx="4" fill="#9fb3cc"/>
+    <rect x="380" y="300" width="40" height="40" rx="4" fill="#9fb3cc"/>
+    <rect width="450" height="310" rx="24" fill="url(#body)"/>
+    <circle cx="170" cy="155" r="118" fill="#1c232b"/>
+    <g fill="#5d6a78" transform="translate(170 155)">
+      <path id="b" d="M0-8C24-42 72-90 90-72 105-57 54-18 7 0z"/>
+      <use href="#b" transform="rotate(90)"/><use href="#b" transform="rotate(180)"/><use href="#b" transform="rotate(270)"/>
+      <circle r="20" fill="#7b8896"/>
+    </g>
+    <circle cx="170" cy="155" r="118" fill="none" stroke="#c5ccd4" stroke-width="10"/>
+    <g stroke="#b5bec8" stroke-width="8" stroke-linecap="round">
+      <path d="M330 70H410M330 110H410M330 150H410M330 190H410M330 230H410"/>
+    </g>
+  </g>
+  <!-- bus line to gateway -->
+  <path d="M590 400C660 400 650 300 720 300" fill="none" stroke="#9cc4ff" stroke-width="10" stroke-dasharray="4 18" stroke-linecap="round"/>
+  <!-- gateway -->
+  <g transform="translate(720 220)">
+    <rect width="170" height="160" rx="20" fill="#fff"/>
+    <rect x="22" y="22" width="126" height="70" rx="8" fill="#e8f0fe"/>
+    <path d="M85 34c10 13 16 21 16 31a16 16 0 0 1-32 0c0-7 3-11 7-15 0 6 3 10 7 10-3-10 0-18 2-26z" fill="#1F6FEB"/>
+    <circle cx="45" cy="125" r="9" fill="#2ecc71"/><circle cx="75" cy="125" r="9" fill="#ffb020"/>
+    <rect x="98" y="118" width="50" height="14" rx="7" fill="#c8d3e0"/>
+  </g>
+  <!-- wifi arcs -->
+  <g fill="none" stroke="#fff" stroke-width="10" stroke-linecap="round" transform="translate(805 190)">
+    <path d="M-30-10a42 42 0 0 1 60 0" opacity=".9"/><path d="M-55-35a78 78 0 0 1 110 0" opacity=".6"/><path d="M-80-60a114 114 0 0 1 160 0" opacity=".35"/>
+  </g>
+</svg>

@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000">
+  <rect width="1000" height="1000" fill="#fff"/>
+  <defs>
+    <linearGradient id="body" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f4f6f8"/><stop offset="1" stop-color="#d9dee4"/>
+    </linearGradient>
+    <radialGradient id="hole" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#3a4552"/><stop offset="1" stop-color="#1c232b"/>
+    </radialGradient>
+  </defs>
+  <rect x="150" y="745" width="70" height="60" rx="6" fill="#8a96a3"/>
+  <rect x="780" y="745" width="70" height="60" rx="6" fill="#8a96a3"/>
+  <rect x="110" y="230" width="780" height="530" rx="36" fill="url(#body)" stroke="#aeb7c1" stroke-width="6"/>
+  <rect x="110" y="230" width="780" height="40" rx="20" fill="#e9edf1"/>
+  <circle cx="400" cy="495" r="205" fill="#c5ccd4"/>
+  <circle cx="400" cy="495" r="190" fill="url(#hole)"/>
+  <g fill="#5d6a78" transform="translate(400 495)">
+    <path id="b" d="M0-12C40-70 120-150 150-120 175-95 90-30 12 0z"/>
+    <use href="#b" transform="rotate(90)"/><use href="#b" transform="rotate(180)"/><use href="#b" transform="rotate(270)"/>
+    <circle r="34" fill="#7b8896"/>
+  </g>
+  <g stroke="#c5ccd4" stroke-width="7" fill="none">
+    <circle cx="400" cy="495" r="80"/><circle cx="400" cy="495" r="135"/>
+    <path d="M210 495H590M400 305V685"/>
+  </g>
+  <g stroke="#b5bec8" stroke-width="10" stroke-linecap="round">
+    <path d="M665 330H820M665 380H820M665 430H820M665 480H820M665 530H820M665 580H820M665 630H820"/>
+  </g>
+  <rect x="660" y="680" width="80" height="36" rx="8" fill="#1F6FEB"/>
+</svg>

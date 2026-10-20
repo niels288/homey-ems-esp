@@ -5,7 +5,7 @@ Bosch, Buderus, Nefit, Junkers or Worcester heat pump or boiler. Enter the
 gateway's IP address; the app asks the gateway which values exist and creates
 them in Homey. No MQTT broker, no manual mapping.
 
-**Status:** in development, read-only. Developed with a Nefit EnviLine split
+**Status:** read-only. Developed with a Nefit EnviLine split
 heat pump.
 
 ## Requirements
