@@ -16,5 +16,8 @@
 		"warn_remove": "__count__ values will be removed from Homey, with their Insights history. Flows that use them stop working.",
 		"settings_title": "Values per device",
 		"pending": "after 24 hours"
+	},
+	"errors": {
+		"token": "EMS-ESP refused the change. Enter the gateway's access token in this device's settings."
 	}
 }

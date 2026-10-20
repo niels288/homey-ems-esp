@@ -5,5 +5,9 @@
   "1.1.0": {
     "en": "Choose which values a device shows: while pairing, through Repair, or in the app settings.",
     "nl": "Kies welke waarden een apparaat toont: bij het koppelen, via Herstellen of in de app-instellingen."
+  },
+  "1.2.0": {
+    "en": "COP from the heat pump's own energy counters, a switch for extra hot water on the thermostat (needs the gateway's access token), and counters the heat pump does not have no longer show a bogus number.",
+    "nl": "COP uit de eigen energietellers van de warmtepomp, een schakelaar voor extra warm water bij de thermostaat (vraagt het toegangstoken van de gateway), en tellers die de warmtepomp niet heeft tonen geen nepgetal meer."
   }
 }

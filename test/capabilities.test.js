@@ -135,6 +135,26 @@ test("homeyValue drops EMS-ESP's unset marker, also after its seconds-to-minutes
 	assert.equal(homeyValue(minutes, values.boiler.uptimecompheating), 386665);
 });
 
+test("only the thermostat's hot water charge becomes a switch; every other setting stays out", () => {
+	const charge = capabilityFor(
+		"dhw.charge",
+		entities.thermostat["dhw.charge"],
+		"thermostat",
+	);
+	assert.equal(charge.id, "ems_switch.dhw_charge");
+	assert.equal(homeyValue(charge, "off"), false);
+	assert.equal(homeyValue(charge, "on"), true);
+	assert.equal(
+		capabilityFor("dhw.charge", entities.thermostat["dhw.charge"], "boiler"),
+		null,
+	);
+	assert.equal(
+		capabilityFor("dhw.onetime", entities.boiler["dhw.onetime"], "boiler"),
+		null,
+	);
+	assert.ok(isDiscovered("ems_switch.dhw_charge"));
+});
+
 test("homeyValue reads on/off in every language the gateway speaks", () => {
 	const flag = capabilityFor("heatingactive", entities.boiler.heatingactive);
 	for (const on of ["aan", "AAN", "an", "på", "wł.", "açık", "ZAP"]) {

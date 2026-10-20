@@ -126,3 +126,64 @@ test("readings carry lifetime COP, and the energy for the 24-hour COP the device
 	const choices = await gateway.choices("boiler");
 	assert.equal(choices.find(({ key }) => key === "cop.day").pending, true);
 });
+
+test("write posts the value with the access token to the entity's path", async (t) => {
+	t.mock.method(globalThis, "fetch", async () => ({
+		ok: true,
+		status: 200,
+		json: async () => ({ message: "OK" }),
+	}));
+	await new Gateway("gw").write("thermostat", "dhw.charge", true, "tok");
+	const [url, init] = globalThis.fetch.mock.calls[0].arguments;
+	assert.equal(url, "http://gw/api/thermostat/dhw/charge");
+	assert.equal(init.method, "POST");
+	assert.equal(init.headers.Authorization, "Bearer tok");
+	assert.deepEqual(JSON.parse(init.body), { value: true });
+});
+
+test("write without a valid access token says so", async (t) => {
+	t.mock.method(globalThis, "fetch", async () => ({
+		ok: false,
+		status: 401,
+		json: async () => ({}),
+	}));
+	await assert.rejects(
+		new Gateway("gw").write("thermostat", "dhw.charge", true, ""),
+		/access token/,
+	);
+});
+
+test("requests to one gateway go one at a time, also from different devices", async (t) => {
+	let inFlight = 0;
+	let most = 0;
+	t.mock.method(globalThis, "fetch", async () => {
+		most = Math.max(most, ++inFlight);
+		await new Promise((resolve) => setImmediate(resolve));
+		inFlight--;
+		return { ok: true, status: 200, json: async () => ({ devices: [] }) };
+	});
+	await Promise.all([
+		new Gateway("one-at-a-time").emsDevices(),
+		new Gateway("one-at-a-time").emsDevices(),
+		new Gateway("one-at-a-time").write("thermostat", "dhw.charge", true, "tok"),
+	]);
+	assert.equal(globalThis.fetch.mock.callCount(), 3);
+	assert.equal(most, 1);
+});
+
+test("a gateway that answers 429 gets a pause before the next request", async (t) => {
+	t.mock.timers.enable({ apis: ["setTimeout"] });
+	const statuses = [429, 200];
+	t.mock.method(globalThis, "fetch", async () => {
+		const status = statuses.shift();
+		return { ok: status === 200, status, json: async () => ({ devices: [] }) };
+	});
+	const gateway = new Gateway("busy");
+	await assert.rejects(gateway.emsDevices(), /HTTP 429/);
+	const next = gateway.emsDevices();
+	await new Promise((resolve) => setImmediate(resolve));
+	assert.equal(globalThis.fetch.mock.callCount(), 1, "still pausing");
+	t.mock.timers.tick(30_000);
+	await next;
+	assert.equal(globalThis.fetch.mock.callCount(), 2);
+});
