@@ -1,5 +1,9 @@
 {
   "1.0.0": {
     "en": "First public release: reads EMS-ESP values as Homey capabilities."
+  },
+  "1.1.0": {
+    "en": "Choose which values a device shows: while pairing, through Repair, or in the app settings.",
+    "nl": "Kies welke waarden een apparaat toont: bij het koppelen, via Herstellen of in de app-instellingen."
   }
 }
