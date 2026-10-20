@@ -18,6 +18,29 @@ module.exports = class EmsDevice extends Homey.Device {
 		this.#start(newSettings).catch(this.error);
 	}
 
+	/** Every value this device's gateway offers, marked whether the user shows it. */
+	async valueChoices() {
+		const hidden = new Set(this.#hidden());
+		const choices = await new Gateway(this.getSetting("host")).choices(
+			this.getData().type,
+		);
+		return choices.map((choice) => ({
+			...choice,
+			shown: !hidden.has(choice.key),
+		}));
+	}
+
+	/** Hides these entity keys, shows the rest; a hidden value's capability (and its Insights) is removed. */
+	async hideValues(keys) {
+		await this.setStoreValue("hidden", keys);
+		await this.#start(this.getSettings());
+	}
+
+	// Hidden rather than shown keys are stored, so entities a firmware update adds appear on their own.
+	#hidden() {
+		return this.getStoreValue("hidden") ?? [];
+	}
+
 	async onDeleted() {
 		this.#run++;
 		this.homey.clearTimeout(this.#timer);
@@ -30,7 +53,10 @@ module.exports = class EmsDevice extends Homey.Device {
 		const { type } = this.getData();
 		let capabilities;
 		try {
-			capabilities = await gateway.discover(type);
+			const hidden = new Set(this.#hidden());
+			capabilities = (await gateway.discover(type)).filter(
+				({ key }) => !hidden.has(key),
+			);
 			await this.#syncCapabilities(capabilities);
 		} catch (err) {
 			if (run !== this.#run) return;

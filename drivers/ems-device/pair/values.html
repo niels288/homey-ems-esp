@@ -1,0 +1,151 @@
+<style>
+  .values-device { margin-bottom: 1.5em; }
+  .values-actions { display: flex; gap: 0.5em; margin: 0.5em 0; }
+  .values-row { display: flex; align-items: center; gap: 0.5em; padding: 0.3em 0; }
+  .values-title { flex: 1; }
+  .values-reading { color: var(--homey-color-mono-500, #888); max-width: 50%; text-align: right; overflow-wrap: anywhere; }
+</style>
+<input class="homey-form-input" id="search" type="search" />
+<div id="devices"></div>
+<button type="button" class="homey-button-primary-full" id="save" data-i18n="values.save">Save</button>
+<script type="application/javascript">
+  // Pairing and repair: talks to the driver's session.
+  const page = {
+    values: () => Homey.emit("values"),
+    save: (hiddenById) => Homey.emit("save", hiddenById),
+    busy: (on) => (on ? Homey.showLoadingOverlay() : Homey.hideLoadingOverlay()),
+    confirm: (message) => Homey.confirm(message, "warning"),
+    alert: (message) => Homey.alert(message),
+    async saved(devices) {
+      for (const device of devices) await Homey.createDevice(device);
+      Homey.done();
+    },
+  };
+
+  // <shared> Kept identical to settings/index.html (test/views.test.js checks); Homey serves no script to both.
+  const t = (key, tokens) => Homey.__(`values.${key}`, tokens);
+  let devices = [];
+
+  function reading({ value, units }) {
+    if (value === null) return t("no_value");
+    if (typeof value === "boolean") return t(value ? "on" : "off");
+    return units ? `${value} ${units}` : String(value);
+  }
+
+  function render() {
+    const root = document.getElementById("devices");
+    root.replaceChildren();
+    for (const device of devices) {
+      const section = document.createElement("section");
+      section.className = "values-device";
+      const heading = document.createElement("h2");
+      heading.className = "homey-title";
+      heading.textContent = device.name;
+      const count = document.createElement("p");
+      const actions = document.createElement("div");
+      actions.className = "values-actions";
+      const list = document.createElement("div");
+      const update = () => {
+        count.textContent = device.error ?? t("count", {
+          shown: device.choices.filter((choice) => choice.shown).length,
+          total: device.choices.length,
+        });
+      };
+      for (const [label, pick] of [
+        ["only_with_value", (choice) => choice.value !== null],
+        ["all", () => true],
+      ]) {
+        const button = document.createElement("button");
+        button.className = "homey-button-secondary-small";
+        button.textContent = t(label);
+        button.addEventListener("click", () => {
+          for (const choice of device.choices) choice.shown = pick(choice);
+          render();
+        });
+        actions.append(button);
+      }
+      for (const choice of device.choices) {
+        const row = document.createElement("label");
+        row.className = "values-row";
+        row.dataset.search = choice.title.toLowerCase();
+        const box = document.createElement("input");
+        box.type = "checkbox";
+        box.className = "homey-form-checkbox-input";
+        box.checked = choice.shown;
+        box.addEventListener("change", () => {
+          choice.shown = box.checked;
+          update();
+        });
+        const title = document.createElement("span");
+        title.className = "values-title";
+        title.textContent = choice.title;
+        const value = document.createElement("span");
+        value.className = "values-reading";
+        value.textContent = reading(choice);
+        row.append(box, title, value);
+        list.append(row);
+      }
+      update();
+      section.append(heading, count, actions, list);
+      root.append(section);
+    }
+    filter();
+  }
+
+  function filter() {
+    const query = document.getElementById("search").value.trim().toLowerCase();
+    for (const row of document.querySelectorAll(".values-row")) {
+      row.hidden = !row.dataset.search.includes(query);
+    }
+  }
+
+  // A device whose gateway did not answer is left out, so its hidden values stay as they are.
+  function hiddenById() {
+    return Object.fromEntries(
+      devices.filter((device) => !device.error).map((device) => [
+        device.id,
+        device.choices.filter((choice) => !choice.shown).map((choice) => choice.key),
+      ]),
+    );
+  }
+
+  // Only a paired device loses something: the capability, its Insights and the Flows using it.
+  function removedCount() {
+    return devices
+      .filter((device) => device.paired)
+      .flatMap((device) => device.choices)
+      .filter((choice) => choice.wasShown && !choice.shown).length;
+  }
+
+  document.getElementById("search").addEventListener("input", filter);
+
+  document.getElementById("save").addEventListener("click", async () => {
+    const removed = removedCount();
+    if (removed > 0 && !(await page.confirm(t("warn_remove", { count: removed })))) return;
+    page.busy(true);
+    try {
+      await page.saved(await page.save(hiddenById()));
+    } catch (err) {
+      page.alert(err.message);
+    } finally {
+      page.busy(false);
+    }
+  });
+
+  async function load() {
+    document.getElementById("search").placeholder = t("search");
+    page.busy(true);
+    try {
+      devices = await page.values();
+      for (const choice of devices.flatMap((device) => device.choices)) choice.wasShown = choice.shown;
+      render();
+    } catch (err) {
+      page.alert(err.message);
+    } finally {
+      page.busy(false);
+    }
+  }
+  // </shared>
+
+  load();
+</script>
