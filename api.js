@@ -1,4 +1,5 @@
 // Web API for settings/index.html; same answers as the pairing session's `values` and `save`.
+const { describeError } = require("./lib/gateway");
 const devicesOf = (homey) => homey.drivers.getDriver("ems-device").getDevices();
 
 module.exports = {
@@ -14,7 +15,11 @@ module.exports = {
 				try {
 					return { ...answer, choices: await device.valueChoices() };
 				} catch (err) {
-					return { ...answer, choices: [], error: err.message };
+					return {
+						...answer,
+						choices: [],
+						error: describeError(err, (key, tokens) => homey.__(key, tokens)),
+					};
 				}
 			}),
 		);

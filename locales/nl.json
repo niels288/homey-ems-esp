@@ -18,7 +18,12 @@
 		"pending": "na 24 uur"
 	},
 	"errors": {
-		"token": "EMS-ESP weigerde de wijziging. Vul het toegangstoken van de gateway in bij de instellingen van dit apparaat."
+		"token": "EMS-ESP weigerde de wijziging. Vul het toegangstoken van de gateway in bij de instellingen van dit apparaat.",
+		"unreachable": "Kan de EMS-ESP-gateway op __host__ niet bereiken (__reason__). Controleer het IP-adres (bij een E32 verschillen het Ethernet- en WiFi-adres) en of Homey in hetzelfde netwerk zit.",
+		"reason_refused": "verbinding geweigerd",
+		"reason_no_route": "geen route naar dat adres",
+		"reason_timeout": "geen antwoord",
+		"reason_not_found": "onbekend adres"
 	},
 	"overview": {
 		"outdoor_unit": "Buitenunit",
