@@ -16,5 +16,8 @@
 		"warn_remove": "__count__ waarden worden uit Homey verwijderd, met hun Insights-geschiedenis. Flows die ze gebruiken werken dan niet meer.",
 		"settings_title": "Waarden per apparaat",
 		"pending": "na 24 uur"
+	},
+	"errors": {
+		"token": "EMS-ESP weigerde de wijziging. Vul het toegangstoken van de gateway in bij de instellingen van dit apparaat."
 	}
 }

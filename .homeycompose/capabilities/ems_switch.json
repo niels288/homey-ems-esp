@@ -1,0 +1,9 @@
+{
+	"type": "boolean",
+	"title": { "en": "Switch", "nl": "Schakelaar" },
+	"getable": true,
+	"setable": true,
+	"insights": true,
+	"uiComponent": "toggle",
+	"icon": "/assets/icon.svg"
+}

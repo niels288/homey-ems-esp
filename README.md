@@ -5,7 +5,9 @@ Bosch, Buderus, Nefit, Junkers or Worcester heat pump or boiler. Enter the
 gateway's IP address; the app asks the gateway which values exist and creates
 them in Homey. No MQTT broker, no manual mapping.
 
-**Status:** read-only. Developed with a Nefit EnviLine split
+**Status:** reads values; the only thing it switches is extra hot water (on
+the thermostat device), which needs the gateway's access token (device settings; EMS-ESP web
+interface → Settings → Security → Manage Users → key icon). Developed with a Nefit EnviLine split
 heat pump.
 
 ## Requirements

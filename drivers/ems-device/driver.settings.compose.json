@@ -2,16 +2,38 @@
 	{
 		"id": "host",
 		"type": "text",
-		"label": { "en": "Gateway IP address", "nl": "IP-adres gateway" },
+		"label": {
+			"en": "Gateway IP address",
+			"nl": "IP-adres gateway"
+		},
 		"value": ""
 	},
 	{
 		"id": "poll_interval",
 		"type": "number",
-		"label": { "en": "Poll interval", "nl": "Uitleesinterval" },
-		"units": { "en": "seconds", "nl": "seconden" },
+		"label": {
+			"en": "Poll interval",
+			"nl": "Uitleesinterval"
+		},
+		"units": {
+			"en": "seconds",
+			"nl": "seconden"
+		},
 		"value": 30,
 		"min": 10,
 		"max": 3600
+	},
+	{
+		"id": "token",
+		"type": "password",
+		"label": {
+			"en": "Access token",
+			"nl": "Toegangstoken"
+		},
+		"value": "",
+		"hint": {
+			"en": "Only needed to switch things on the gateway, such as extra hot water (thermostat). EMS-ESP web interface → Settings → Security → Manage Users → key icon at an admin user.",
+			"nl": "Alleen nodig om iets op de gateway te schakelen, zoals extra warm water (thermostaat). EMS-ESP-webinterface → Settings → Security → Manage Users → sleutelicoon bij een admin-gebruiker."
+		}
 	}
 ]
