@@ -58,3 +58,14 @@ test("missing or hidden values leave their place empty instead of breaking the d
 		null,
 	);
 });
+
+test("the compressor runs when the heat pump delivers heat, even if its compressor flag says off", () => {
+	const running = overview(
+		{
+			boiler: { "ems_boolean.hpcompon": false, "measure_power.hppower": 3200 },
+		},
+		"nl",
+	);
+	assert.equal(running.on.compressor, true);
+	assert.equal(running.text.compressor, "3,2 kW");
+});
