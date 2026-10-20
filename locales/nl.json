@@ -22,7 +22,6 @@
 	},
 	"overview": {
 		"outdoor_unit": "Buitenunit",
-		"indoor_unit": "Binnenunit",
 		"outdoor_sensor": "Buiten",
 		"condenser": "Condensor",
 		"element": "Element",

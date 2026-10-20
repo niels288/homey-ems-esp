@@ -22,7 +22,6 @@
 	},
 	"overview": {
 		"outdoor_unit": "Outdoor unit",
-		"indoor_unit": "Indoor unit",
 		"outdoor_sensor": "Outdoor",
 		"condenser": "Condenser",
 		"element": "Element",

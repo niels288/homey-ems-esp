@@ -2,7 +2,6 @@ const { overview } = require("../../lib/overview");
 
 const LABELS = [
 	"outdoor_unit",
-	"indoor_unit",
 	"outdoor_sensor",
 	"condenser",
 	"element",
