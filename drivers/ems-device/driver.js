@@ -1,5 +1,5 @@
 const Homey = require("homey");
-const { Gateway } = require("../../lib/gateway");
+const { Gateway, describeError } = require("../../lib/gateway");
 
 // Pairing and repair share the "values" view: `values` lists each device's choices, `save` takes the hidden keys per device id.
 module.exports = class EmsDriver extends Homey.Driver {
@@ -10,7 +10,13 @@ module.exports = class EmsDriver extends Homey.Driver {
 
 		session.setHandler("host", async (host) => {
 			gateway = new Gateway(String(host).trim());
-			emsDevices = await gateway.emsDevices();
+			try {
+				emsDevices = await gateway.emsDevices();
+			} catch (err) {
+				throw new Error(
+					describeError(err, (key, tokens) => this.homey.__(key, tokens)),
+				);
+			}
 			if (emsDevices.length === 0)
 				throw new Error(this.homey.__("pair.no_devices"));
 		});

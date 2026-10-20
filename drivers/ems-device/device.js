@@ -1,5 +1,5 @@
 const Homey = require("homey");
-const { Gateway } = require("../../lib/gateway");
+const { Gateway, describeError } = require("../../lib/gateway");
 const { isDiscovered } = require("../../lib/capabilities");
 const { windowCop } = require("../../lib/cop");
 
@@ -7,6 +7,7 @@ const RETRY_DISCOVERY_MS = 60_000;
 
 module.exports = class EmsDevice extends Homey.Device {
 	#timer = null;
+	#translate = (key, tokens) => this.homey.__(key, tokens);
 	#listening = new Set();
 	// Each (re)start bumps the run; an older poll still in flight then stops instead of rescheduling.
 	#run = 0;
@@ -68,7 +69,9 @@ module.exports = class EmsDevice extends Homey.Device {
 			capabilities = await this.#syncCapabilities(capabilities);
 		} catch (err) {
 			if (run !== this.#run) return;
-			await this.setUnavailable(err.message).catch(this.error);
+			await this.setUnavailable(describeError(err, this.#translate)).catch(
+				this.error,
+			);
 			this.#timer = this.homey.setTimeout(
 				() => this.#start(this.getSettings()).catch(this.error),
 				RETRY_DISCOVERY_MS,
@@ -137,9 +140,7 @@ module.exports = class EmsDevice extends Homey.Device {
 				this.getSetting("token"),
 			);
 		} catch (err) {
-			throw err.code === "token"
-				? new Error(this.homey.__("errors.token"))
-				: err;
+			throw new Error(describeError(err, this.#translate));
 		}
 	}
 
@@ -174,7 +175,9 @@ module.exports = class EmsDevice extends Homey.Device {
 			);
 			await this.setAvailable();
 		} catch (err) {
-			await this.setUnavailable(err.message).catch(this.error);
+			await this.setUnavailable(describeError(err, this.#translate)).catch(
+				this.error,
+			);
 		}
 	}
 };

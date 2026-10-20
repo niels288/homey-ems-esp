@@ -18,7 +18,12 @@
 		"pending": "after 24 hours"
 	},
 	"errors": {
-		"token": "EMS-ESP refused the change. Enter the gateway's access token in this device's settings."
+		"token": "EMS-ESP refused the change. Enter the gateway's access token in this device's settings.",
+		"unreachable": "Cannot reach the EMS-ESP gateway at __host__ (__reason__). Check the IP address (on an E32 the Ethernet and WiFi addresses differ) and that Homey is on the same network.",
+		"reason_refused": "connection refused",
+		"reason_no_route": "no route to that address",
+		"reason_timeout": "no answer",
+		"reason_not_found": "unknown address"
 	},
 	"overview": {
 		"outdoor_unit": "Outdoor unit",

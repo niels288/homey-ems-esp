@@ -1,6 +1,6 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
-const { Gateway } = require("../lib/gateway");
+const { Gateway, describeError } = require("../lib/gateway");
 
 function answering(byPath) {
 	return async (url) => {
@@ -186,4 +186,34 @@ test("a gateway that answers 429 gets a pause before the next request", async (t
 	t.mock.timers.tick(30_000);
 	await next;
 	assert.equal(globalThis.fetch.mock.callCount(), 2);
+});
+
+test("an unreachable gateway is reported with its address and the reason, in the user's language", async (t) => {
+	t.mock.method(globalThis, "fetch", async () => {
+		throw Object.assign(new TypeError("fetch failed"), {
+			cause: Object.assign(new Error("connect"), { code: "ECONNREFUSED" }),
+		});
+	});
+	const err = await new Gateway("192.168.0.3").emsDevices().catch((e) => e);
+	const __ = (key, tokens) => `${key} ${JSON.stringify(tokens ?? {})}`;
+	assert.equal(
+		describeError(err, __),
+		'errors.unreachable {"host":"192.168.0.3","reason":"errors.reason_refused {}"}',
+	);
+	assert.equal(
+		describeError(new Error("EMS-ESP 3.7 or newer is required"), __),
+		"EMS-ESP 3.7 or newer is required",
+	);
+});
+
+test("a request that times out counts as unreachable too", async (t) => {
+	t.mock.method(globalThis, "fetch", async () => {
+		throw new DOMException(
+			"The operation was aborted due to timeout",
+			"TimeoutError",
+		);
+	});
+	const err = await new Gateway("slow").emsDevices().catch((e) => e);
+	assert.equal(err.code, "unreachable");
+	assert.equal(err.reason, "ETIMEDOUT");
 });
