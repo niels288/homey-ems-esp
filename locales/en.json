@@ -19,5 +19,22 @@
 	},
 	"errors": {
 		"token": "EMS-ESP refused the change. Enter the gateway's access token in this device's settings."
+	},
+	"overview": {
+		"outdoor_unit": "Outdoor unit",
+		"indoor_unit": "Indoor unit",
+		"outdoor_sensor": "Outdoor",
+		"condenser": "Condenser",
+		"element": "Element",
+		"valve": "3-way valve",
+		"cylinder": "Hot water",
+		"buffer": "Buffer",
+		"pump": "Pump",
+		"distributor": "Floor heating",
+		"thermostat": "Room",
+		"flow": "Flow",
+		"return": "Return",
+		"target_flow": "target",
+		"compressor_off": "off"
 	}
 }

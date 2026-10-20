@@ -11,3 +11,4 @@
 | **Hidden value** | An entity the user chose not to show; its key is kept in the device store, and discovery skips it (ADR 0002). |
 | **COP** | Coefficient of performance: heat supplied ÷ electricity consumed (aux heater included), from the gateway's own counters (ADR 0003). |
 | **Switch** | A writeable on/off entity Homey may change, from an allowlist per device type (now only the thermostat's `dhw.charge`); needs the gateway's access token (ADR 0004). |
+| **Overview** | The dashboard widget drawing the installation with live values, from the devices' capabilities (ADR 0005). |

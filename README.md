@@ -35,6 +35,12 @@ If `homey app install` fails with a bare `400`, run it from a computer on the
 same network as the Homey: the install route through the Athom cloud failed
 on a Homey Pro (Early 2023), the local one worked.
 
+## Dashboard widget
+
+*Heat pump overview* draws the installation (outdoor unit, condenser, electric
+element, 3-way valve, hot water cylinder, buffer, floor heating, thermostat)
+with live values from the devices. Needs Homey 12.3 or newer.
+
 ## Develop
 
 ```bash
