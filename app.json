@@ -12,8 +12,8 @@
     "nl": "EMS-ESP"
   },
   "description": {
-    "en": "Reads your Bosch, Buderus or Nefit heat pump through an EMS-ESP gateway, without MQTT.",
-    "nl": "Leest je Bosch-, Buderus- of Nefit-warmtepomp uit via een EMS-ESP-gateway, zonder MQTT."
+    "en": "Know what your heat pump is really doing.",
+    "nl": "Weet wat je warmtepomp écht doet."
   },
   "category": [
     "climate"

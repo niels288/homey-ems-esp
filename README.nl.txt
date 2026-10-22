@@ -6,4 +6,6 @@ Vul het IP-adres van de gateway in en kies de apparaten op de bus, zoals de warm
 
 De namen van de waarden volgen de taal die in de EMS-ESP-webinterface is ingesteld.
 
-Vereist: EMS-ESP 3.7 of nieuwer. Deze versie leest alleen; ze verandert nooit iets aan je verwarming.
+De app leest alleen, op één ding na: een schakelaar voor extra warm water bij het thermostaatapparaat. Schakelen vraagt het toegangstoken van de gateway (EMS-ESP-webinterface → Settings → Security → Manage Users → sleutelicoon bij een admin-gebruiker), dat je invult in de instellingen van het thermostaatapparaat. Het token wordt bewaard in die apparaatinstellingen op je Homey en gaat alleen naar je EMS-ESP-gateway in je lokale netwerk, wanneer je de schakelaar gebruikt. Zonder token leest de app alleen en verandert ze niets.
+
+Vereist: EMS-ESP 3.7 of nieuwer.
