@@ -19,6 +19,9 @@ Homey Pro app for EMS-ESP gateways, maintained by niels288. Public, MIT.
 - **Self-merge once CI is green**, except a Critical Change (see profile).
 - **Worktree per issue** on branch `issue-<n>-<slug>`; the main checkout stays
   on `main`. Commit, rebase on `main`, then push.
+- **Local AI review.** Before every push, run `ai-review-local` and answer
+  its findings. The agent skills live in `.claude/skills/` (mattpocock/skills,
+  pinned in `skills-lock.json`).
 - **Decisions** go in `docs/adr/`, domain terms in `CONTEXT.md`, changes in
   `.homeychangelog.json` (the App Store shows it). Every published build gets
   an annotated tag `v<version>` on the commit it was built from; no GitHub
