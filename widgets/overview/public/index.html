@@ -28,7 +28,8 @@
   .element rect { fill: #fdf2e0; stroke: #b7791f; stroke-width: 3; }
   .element.on rect { fill: #f6ad3c; }
   .cylinder.on rect.tank { stroke: #e5484d; stroke-width: 6; }
-  .fan { transform-origin: 150px 365px; }
+  /* The fan group sits at the hub (0 0), so it turns about its own centre. */
+  .fan { transform-origin: 0 0; transform-box: view-box; }
   .on .fan { animation: spin 1.6s linear infinite; }
   @keyframes spin { to { transform: rotate(360deg); } }
   @media (prefers-reduced-motion: reduce) { .on .fan { animation: none; } }
@@ -63,8 +64,14 @@
     <rect class="box" x="20" y="250" width="225" height="235" rx="18" />
     <rect x="36" y="280" width="34" height="160" rx="6" fill="#dbe7fb" stroke="#3b82f6" stroke-width="3" />
     <circle class="ink" cx="150" cy="365" r="58" />
-    <g class="fan">
-      <path fill="currentColor" d="M150 365c-6-22 0-42 14-44 14 4 10 26-14 44zm0 0c22-6 40 6 38 20-8 12-28 2-38-20zm0 0c-16 16-38 18-44 6 0-14 22-18 44-6z" />
+    <!-- three equal blades at 120°, turning about the hub -->
+    <g transform="translate(150 365)">
+      <g class="fan">
+        <path id="blade" fill="currentColor" d="M0 0C-14-12-17-38-5-48C5-51 15-43 12-29C9-17 5-9 0 0Z" />
+        <use href="#blade" transform="rotate(120)" />
+        <use href="#blade" transform="rotate(240)" />
+        <circle r="8" fill="currentColor" />
+      </g>
     </g>
     <text class="value" x="132" y="470" text-anchor="middle" data-text="compressor" />
   </g>
